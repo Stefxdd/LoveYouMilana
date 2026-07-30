@@ -8,23 +8,36 @@
 <body style="
   margin:0;
   min-height:100vh;
-  background-image:url('IMG_9350.jpg');
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+  background:black;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  overflow:hidden;
 ">
 
+  <!-- Your photo: left side -->
+  <img src="stef.jpg" style="
+    width:25%;
+    height:100vh;
+    object-fit:cover;
+  ">
+
+  <!-- Video: middle -->
   <video controls playsinline style="
-    width:90%;
-    max-width:700px;
-    border-radius:15px;
+    width:50%;
+    max-height:100vh;
+    object-fit:contain;
   ">
     <source src="LoveYouMilanaaaaaa.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
+
+  <!-- Her photo: right side -->
+  <img src="IMG_9350.jpg" style="
+    width:25%;
+    height:100vh;
+    object-fit:cover;
+  ">
 
 </body>
 </html>
