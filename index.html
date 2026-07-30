@@ -12,33 +12,39 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
+  gap:12px;
+  padding:12px;
+  box-sizing:border-box;
 ">
 
-  <!-- Your photo: left side -->
+  <!-- Your photo: left -->
   <img src="stef.jpg" style="
-    width:25%;
-    height:100vh;
-    object-fit:cover;
+    width:22%;
+    max-width:220px;
+    max-height:70vh;
+    object-fit:contain;
+    border-radius:12px;
   ">
 
   <!-- Video: middle -->
   <video controls playsinline style="
-    width:50%;
-    max-height:100vh;
-    object-fit:contain;
+    width:52%;
+    max-width:700px;
+    max-height:75vh;
+    border-radius:12px;
   ">
     <source src="LoveYouMilanaaaaaa.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 
-  <!-- Her photo: right side -->
+  <!-- Her photo: right -->
   <img src="IMG_9350.jpg" style="
-    width:25%;
-    height:100vh;
-    object-fit:cover;
+    width:22%;
+    max-width:220px;
+    max-height:70vh;
+    object-fit:contain;
+    border-radius:12px;
   ">
 
 </body>
 </html>
-
