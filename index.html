@@ -31,7 +31,6 @@ text-align:center;
 }
 
 
-
 h1{
 
 margin:8px;
@@ -47,8 +46,11 @@ text-shadow:0 0 15px #ff3e96;
 #hud{
 
 display:flex;
+
 justify-content:center;
+
 gap:30px;
+
 font-size:20px;
 
 }
@@ -74,12 +76,15 @@ border-radius:20px;
 
 
 background:
+
 linear-gradient(#29103d,#07050b);
 
 
 box-shadow:0 0 30px #ff3e96;
 
 }
+
+
 
 
 
@@ -94,6 +99,7 @@ height:10000px;
 bottom:0;
 
 }
+
 
 
 
@@ -139,6 +145,8 @@ animation:fallAway 1s forwards;
 
 
 
+
+
 @keyframes fallAway{
 
 
@@ -158,7 +166,6 @@ transform:
 rotate(720deg)
 translateY(180px)
 scale(.3);
-
 
 opacity:0;
 
@@ -230,7 +237,9 @@ border-radius:50%;
 
 background-image:url("stef.jpg");
 
+
 background-size:120%;
+
 
 background-position:center 65%;
 
@@ -246,6 +255,7 @@ box-shadow:
 0 0 12px #ff4e9d;
 
 }
+
 
 
 
@@ -298,6 +308,7 @@ transform:translateY(-8px);
 margin-top:10px;
 
 }
+
 
 
 
@@ -358,6 +369,7 @@ flex-direction:column;
 
 
 
+
 #endScreen h2{
 
 color:#ff91c8;
@@ -368,19 +380,27 @@ font-size:40px;
 
 
 
+
 #endScreen a{
+
 
 background:#e63d8f;
 
+
 padding:15px 30px;
+
 
 border-radius:30px;
 
+
 color:white;
+
 
 text-decoration:none;
 
+
 }
+
 
 
 </style>
@@ -396,6 +416,7 @@ text-decoration:none;
 
 
 <div id="hud">
+
 
 <div>
 
@@ -414,10 +435,12 @@ Lives:
 
 </span>
 
+
 </div>
 
 
 </div>
+
 
 
 
@@ -432,6 +455,8 @@ Lives:
 
 
 </div>
+
+
 
 
 
@@ -452,7 +477,8 @@ You found all my hearts 🥹
 </p>
 
 
-<a href="https://stefxdd.github.io/MilanaEstiBravo/game.html">
+
+<a id="endButton" href="#">
 
 Continue ❤️
 
@@ -463,6 +489,7 @@ Continue ❤️
 
 
 </div>
+
 
 
 
@@ -504,6 +531,7 @@ const livesText = document.getElementById("lives");
 const endScreen = document.getElementById("endScreen");
 const endTitle = document.getElementById("endTitle");
 const endText = document.getElementById("endText");
+const endButton = document.getElementById("endButton");
 
 
 
@@ -528,20 +556,23 @@ let gameFinished = false;
 let grounded = false;
 
 
-let left = false;
-let right = false;
+let left=false;
+let right=false;
 
 
 
-const gravity = -0.55;
-const jumpPower = 14;
+const gravity=-0.55;
+const jumpPower=14;
+
 
 
 
 // CHECKPOINT
 
-let lastSafeX = x;
-let lastSafeY = 40;
+let lastSafeX=x;
+let lastSafeY=40;
+
+
 
 
 
@@ -560,14 +591,12 @@ let platform=document.createElement("div");
 platform.className="platform";
 
 
-
 platform.style.width =
 (100+Math.random()*90)+"px";
 
 
 platform.style.left =
 (15+Math.random()*60)+"%";
-
 
 
 platform.style.bottom =
@@ -588,13 +617,18 @@ platforms.push(platform);
 
 
 
+
+
 function updateLives(){
+
 
 livesText.innerHTML =
 "❤️".repeat(lives)+
 "🖤".repeat(3-lives);
 
+
 }
+
 
 
 
@@ -620,13 +654,10 @@ vx=0;
 vy=0;
 
 
-
 camera=Math.max(0,lastSafeY-300);
 
 
-world.style.bottom =
--camera+"px";
-
+world.style.bottom=-camera+"px";
 
 
 player.style.opacity="1";
@@ -635,11 +666,11 @@ player.style.opacity="1";
 player.style.transform="none";
 
 
-
 falling=false;
 
 
 }
+
 
 
 
@@ -656,9 +687,12 @@ return;
 
 
 
+
 lives--;
 
+
 updateLives();
+
 
 
 falling=true;
@@ -668,10 +702,13 @@ player.classList.add("falling");
 
 
 
+
+
 if(lives<=0){
 
 
 gameFinished=true;
+
 
 
 setTimeout(()=>{
@@ -683,16 +720,29 @@ endScreen.style.display="flex";
 endTitle.innerHTML="Game Over 😭";
 
 
-endText.innerHTML="Try again ❤️";
+endText.innerHTML="You almost got them ❤️";
+
+
+endButton.innerHTML="Try Again 🔄";
+
+
+endButton.onclick=function(){
+
+location.reload();
+
+};
 
 
 },1000);
+
 
 
 return;
 
 
 }
+
+
 
 
 
@@ -725,21 +775,29 @@ if(gameFinished)
 return;
 
 
+
 gameFinished=true;
+
 
 
 endScreen.style.display="flex";
 
 
-endTitle.innerHTML=
-"Bravo Milana ❤️";
+endTitle.innerHTML="Bravo Milana ❤️";
 
 
-endText.innerHTML=
-"You found all my hearts 🥹";
+endText.innerHTML="You found all my hearts 🥹";
+
+
+endButton.innerHTML="Continue ❤️";
+
+
+endButton.href="https://stefxdd.github.io/MilanaEstiBravo/LoveYouMilana.html";
+
 
 
 }
+
 
 
 
@@ -763,9 +821,9 @@ return;
 
 
 
-// reset grounded every frame
 
 grounded=false;
+
 
 
 
@@ -789,12 +847,13 @@ vx*=0.8;
 
 
 
-vy += gravity;
+vy+=gravity;
 
 
-x += vx;
+x+=vx;
 
-y += vy;
+y+=vy;
+
 
 
 
@@ -817,9 +876,6 @@ x=game.clientWidth-55;
 
 
 
-// PLATFORM COLLISION
-
-
 platforms.forEach(platform=>{
 
 
@@ -831,19 +887,20 @@ let py=parseInt(platform.style.bottom);
 
 
 
+
 if(
 
-x+55 > px &&
+x+55>px &&
 
-x < px+platform.offsetWidth &&
-
-
-y <= py+18 &&
-
-y >= py-15 &&
+x<px+platform.offsetWidth &&
 
 
-vy < 0
+y<=py+18 &&
+
+y>=py-15 &&
+
+
+vy<0
 
 ){
 
@@ -854,12 +911,9 @@ y=py+18;
 vy=jumpPower;
 
 
-
 grounded=true;
 
 
-
-// save higher checkpoint
 
 if(y>lastSafeY){
 
@@ -886,9 +940,6 @@ lastSafeY=y;
 
 
 
-// CAMERA
-
-
 if(y-camera>300){
 
 
@@ -903,10 +954,6 @@ world.style.bottom=-camera+"px";
 
 
 
-
-
-
-// FALL
 
 
 if(y<camera-250 && !falling){
@@ -924,6 +971,7 @@ loseLife();
 
 
 player.style.left=x+"px";
+
 
 player.style.bottom=y+"px";
 
@@ -977,6 +1025,7 @@ hearts.push(heart);
 
 
 }
+
 
 
 
@@ -1051,7 +1100,6 @@ win();
 });
 
 
-
 }
 
 
@@ -1061,9 +1109,10 @@ win();
 
 
 
-// add heart checking into update
 
-const originalUpdate=update;
+// add collecting to game loop
+
+const oldUpdate=update;
 
 
 update=function(){
@@ -1072,7 +1121,7 @@ update=function(){
 collectHearts();
 
 
-originalUpdate();
+oldUpdate();
 
 
 };
@@ -1084,7 +1133,8 @@ originalUpdate();
 
 
 
-// KEYBOARD
+
+// KEYBOARD CONTROLS
 
 
 document.addEventListener("keydown",e=>{
@@ -1102,7 +1152,9 @@ right=true;
 
 
 
-// ONLY JUMP IF ON PLATFORM
+
+
+// ONLY JUMP ON PLATFORM
 
 if(
 e.key==="ArrowUp" &&
@@ -1121,6 +1173,8 @@ grounded=false;
 
 
 });
+
+
 
 
 
@@ -1158,7 +1212,6 @@ right=false;
 function hold(button,press,release){
 
 
-
 button.addEventListener("pointerdown",e=>{
 
 
@@ -1178,8 +1231,8 @@ button.addEventListener("pointerup",release);
 button.addEventListener("pointerleave",release);
 
 
-
 }
+
 
 
 
@@ -1196,6 +1249,7 @@ document.getElementById("left"),
 ()=>left=false
 
 );
+
 
 
 
@@ -1220,8 +1274,6 @@ document.getElementById("right"),
 
 
 
-// FIXED JUMP BUTTON
-
 document.getElementById("jump")
 .addEventListener("pointerdown",()=>{
 
@@ -1238,8 +1290,8 @@ grounded=false;
 }
 
 
-
 });
+
 
 
 
