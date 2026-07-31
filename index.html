@@ -15,6 +15,7 @@
     -webkit-tap-highlight-color:transparent;
 }
 
+
 body{
 
     margin:0;
@@ -95,7 +96,7 @@ h1{
 
     width:100%;
 
-    height:5000px;
+    height:7000px;
 
     bottom:0;
 
@@ -132,8 +133,41 @@ h1{
 
     z-index:20;
 
-    transition:
-    opacity .3s;
+}
+
+
+
+.falling{
+
+    animation:fallAway 1s forwards;
+
+}
+
+
+
+@keyframes fallAway{
+
+
+0%{
+
+    transform:rotate(0deg) scale(1);
+
+    opacity:1;
+
+}
+
+
+100%{
+
+    transform:
+    rotate(720deg)
+    translateY(180px)
+    scale(.3);
+
+    opacity:0;
+
+}
+
 
 }
 
@@ -308,6 +342,7 @@ button{
 
 
 
+
 #endScreen{
 
 
@@ -372,7 +407,6 @@ button{
 }
 
 
-
 </style>
 
 </head>
@@ -401,9 +435,7 @@ Lives:
 
 </div>
 
-
 </div>
-
 
 
 <div id="game">
@@ -416,7 +448,6 @@ Lives:
 
 
 </div>
-
 
 
 <div id="endScreen">
@@ -432,7 +463,6 @@ You found all my hearts 🥹
 </p>
 
 
-
 <a href="https://stefxdd.github.io/MilanaEstiBravo">
 Continue ❤️
 </a>
@@ -442,7 +472,6 @@ Continue ❤️
 
 
 </div>
-
 
 
 <div id="controls">
@@ -464,11 +493,9 @@ Continue ❤️
 
 
 </div>
-
-
-
 <script>
-  const game = document.getElementById("game");
+
+const game = document.getElementById("game");
 const world = document.getElementById("world");
 const player = document.getElementById("player");
 
@@ -491,8 +518,8 @@ let camera = 0;
 let score = 0;
 let lives = 3;
 
-let gameFinished = false;
 let falling = false;
+let gameFinished = false;
 
 
 let left = false;
@@ -504,36 +531,41 @@ const jumpPower = 14;
 
 
 
+// CHECKPOINT
+
 let lastSafeX = x;
 let lastSafeY = y;
 
 
 
-/* CREATE PLATFORMS */
+// PLATFORMS
 
 let platforms = [];
 
 
-for(let i = 0; i < 55; i++){
+for(let i = 0; i < 60; i++){
 
     let platform = document.createElement("div");
 
-    platform.className = "platform";
+    platform.className="platform";
+
+
+    let width = 100 + Math.random()*80;
+
+
+    platform.style.width = width+"px";
 
 
     platform.style.left =
-    Math.random()*75 + "%";
+    (20 + Math.random()*55)+"%";
 
 
     platform.style.bottom =
-    (i*90) + "px";
-
-
-    platform.style.width =
-    (20 + Math.random()*25) + "%";
+    (i*110)+"px";
 
 
     world.appendChild(platform);
+
 
     platforms.push(platform);
 
@@ -541,38 +573,9 @@ for(let i = 0; i < 55; i++){
 
 
 
+// initial platform
 
-/* CREATE HEARTS */
-
-for(let i = 1; i <= 30; i++){
-
-    let heart = document.createElement("div");
-
-    heart.className = "collectible";
-
-
-    heart.style.left =
-    Math.random()*80 + "%";
-
-
-    heart.style.bottom =
-    (i*150+80)+"px";
-
-
-    heart.innerHTML = `
-
-    <div class="stef"></div>
-
-    <span>❤️</span>
-
-    `;
-
-
-    world.appendChild(heart);
-
-}
-
-
+lastSafeY = 40;
 
 
 
@@ -587,30 +590,49 @@ function updateLives(){
 
 
 
-
 function respawn(){
 
-    falling = false;
-
-    player.style.opacity = "1";
+    player.classList.remove("falling");
 
 
     x = lastSafeX;
 
-    y = lastSafeY + 80;
+    y = lastSafeY + 25;
 
 
-    vy = 8;
+    vx = 0;
+
+    vy = 0;
+
+
+    camera = Math.max(0,lastSafeY-300);
+
+
+    world.style.bottom =
+    -camera+"px";
+
+
+    player.style.opacity="1";
+
+
+    player.style.transform="none";
+
+
+    falling=false;
 
 }
 
 
 
 
+
 function loseLife(){
 
-    if(gameFinished)
+
+    if(gameFinished || falling)
+
     return;
+
 
 
     lives--;
@@ -618,13 +640,14 @@ function loseLife(){
     updateLives();
 
 
-    player.style.opacity="0";
-
-
     falling=true;
 
 
-    if(lives <= 0){
+    player.classList.add("falling");
+
+
+
+    if(lives<=0){
 
 
         gameFinished=true;
@@ -655,7 +678,9 @@ function loseLife(){
 
     setTimeout(()=>{
 
+
         respawn();
+
 
     },1000);
 
@@ -665,11 +690,8 @@ function loseLife(){
 
 
 
+
 function win(){
-
-
-    if(gameFinished)
-    return;
 
 
     gameFinished=true;
@@ -697,202 +719,196 @@ function win(){
 function update(){
 
 
-if(gameFinished){
+    if(gameFinished){
 
-requestAnimationFrame(update);
+        requestAnimationFrame(update);
 
-return;
+        return;
 
-}
+    }
 
 
 
-if(left)
+    if(left)
 
-vx=-5;
+        vx=-5;
 
-else if(right)
 
-vx=5;
+    else if(right)
 
-else
+        vx=5;
 
-vx*=0.8;
 
+    else
 
+        vx*=0.8;
 
-vy += gravity;
 
 
 
-x += vx;
+    vy += gravity;
 
-y += vy;
 
+    x += vx;
 
+    y += vy;
 
-if(x<0)
 
-x=0;
 
 
-if(x>game.clientWidth-55)
+    if(x<0)
 
-x=game.clientWidth-55;
+        x=0;
 
 
+    if(x>game.clientWidth-55)
 
+        x=game.clientWidth-55;
 
 
-let landed=false;
 
 
 
-platforms.forEach(platform=>{
 
+    // COLLISION
 
-let px = platform.offsetLeft;
 
-let py =
-platform.offsetTop;
+    platforms.forEach(platform=>{
 
 
+        let px = platform.offsetLeft;
 
-if(
 
-x+55 > px &&
+        let py = parseInt(platform.style.bottom);
 
-x < px+platform.offsetWidth &&
 
 
-y <= py+18 &&
+        if(
 
-y >= py-10 &&
+        x+55 > px &&
 
-vy < 0
+        x < px+platform.offsetWidth &&
 
-){
 
+        y <= py+18 &&
 
-y = py+18;
+        y >= py-15 &&
 
+        vy < 0
 
-vy = jumpPower;
+        ){
 
 
-landed=true;
+            y = py+18;
 
 
-lastSafeX=x;
+            vy = jumpPower;
 
-lastSafeY=y;
 
 
-}
+            // SAVE ONLY HIGHER CHECKPOINTS
 
+            if(y > lastSafeY){
 
-});
+                lastSafeX=x;
 
+                lastSafeY=y;
 
+            }
 
 
+        }
 
-/* CAMERA */
 
 
-if(y-camera > 300){
+    });
 
 
-camera = y-300;
 
 
-world.style.bottom =
--camera+"px";
 
+    // CAMERA FOLLOW
 
-}
 
+    if(y-camera > 300){
 
 
+        camera=y-300;
 
 
-/* FALL OFF MAP */
+        world.style.bottom =
+        -camera+"px";
 
 
-if(y < camera-200 && !falling){
+    }
 
 
-loseLife();
 
 
-}
 
 
+    // DEATH
 
 
+    if(y < camera-250 && !falling && vy < 0){
 
-/* COLLECT HEARTS */
+        loseLife();
 
+    }
 
-document.querySelectorAll(".collectible")
-.forEach(item=>{
 
 
-let ix=item.offsetLeft;
 
-let iy=item.offsetTop;
 
 
 
-if(
+    player.style.left=x+"px";
 
-x+55 > ix &&
+    player.style.bottom=y+"px";
 
-x < ix+70 &&
 
-y+55 > iy &&
 
-y < iy+50
-
-){
-
-
-item.remove();
-
-
-score++;
-
-
-scoreText.innerHTML =
-score;
-
-
-
-if(score>=30)
-
-win();
+    requestAnimationFrame(update);
 
 
 }
+// HEARTS
+
+let hearts = [];
+
+
+for(let i=1;i<=30;i++){
+
+
+    let heart = document.createElement("div");
+
+
+    heart.className="collectible";
+
+
+    heart.style.left =
+    (15 + Math.random()*65)+"%";
+
+
+    heart.style.bottom =
+    (i*200+120)+"px";
 
 
 
-});
+    heart.innerHTML = `
+
+    <div class="stef"></div>
+
+    <span>❤️</span>
+
+    `;
 
 
 
+    world.appendChild(heart);
 
 
-player.style.left =
-x+"px";
-
-
-player.style.bottom =
-y+"px";
-
-
-
-requestAnimationFrame(update);
+    hearts.push(heart);
 
 
 }
@@ -903,42 +919,139 @@ requestAnimationFrame(update);
 
 
 
-/* CONTROLS */
+function collectHearts(){
+
+
+    hearts.forEach((heart,index)=>{
+
+
+        if(!heart)
+
+        return;
+
+
+
+        let ix = heart.offsetLeft;
+
+        let iy = parseInt(heart.style.bottom);
+
+
+
+
+        if(
+
+        x+55 > ix &&
+
+        x < ix+70 &&
+
+
+        y+55 > iy &&
+
+        y < iy+50
+
+        ){
+
+
+            heart.remove();
+
+
+            hearts[index]=null;
+
+
+            score++;
+
+
+            scoreText.innerHTML=score;
+
+
+
+            if(score>=30){
+
+                win();
+
+            }
+
+
+        }
+
+
+
+    });
+
+
+}
+
+
+
+
+
+
+
+
+// add collection into game loop
+
+const oldUpdate = update;
+
+
+update = function(){
+
+    collectHearts();
+
+    oldUpdate();
+
+};
+
+
+
+
+
+
+
+
+
+// KEYBOARD
 
 
 document.addEventListener("keydown",e=>{
 
 
-if(e.key==="ArrowLeft")
+    if(e.key==="ArrowLeft")
 
-left=true;
-
-
-if(e.key==="ArrowRight")
-
-right=true;
+        left=true;
 
 
-if(e.key==="ArrowUp" && !falling)
 
-vy=jumpPower;
+    if(e.key==="ArrowRight")
+
+        right=true;
+
+
+
+    if(e.key==="ArrowUp" && !falling)
+
+        vy=jumpPower;
+
 
 
 });
+
+
 
 
 
 document.addEventListener("keyup",e=>{
 
 
-if(e.key==="ArrowLeft")
+    if(e.key==="ArrowLeft")
 
-left=false;
+        left=false;
 
 
-if(e.key==="ArrowRight")
 
-right=false;
+    if(e.key==="ArrowRight")
+
+        right=false;
+
 
 
 });
@@ -947,23 +1060,36 @@ right=false;
 
 
 
-function hold(btn,press,release){
 
 
-btn.addEventListener("pointerdown",e=>{
 
-e.preventDefault();
 
-press();
+// MOBILE BUTTONS
+
+
+function hold(button,press,release){
+
+
+button.addEventListener("pointerdown",e=>{
+
+
+    e.preventDefault();
+
+    press();
+
 
 });
 
 
-btn.addEventListener("pointerup",release);
 
-btn.addEventListener("pointerleave",release);
+button.addEventListener("pointerup",release);
+
+
+button.addEventListener("pointerleave",release);
+
 
 }
+
 
 
 
@@ -980,6 +1106,8 @@ document.getElementById("left"),
 
 
 
+
+
 hold(
 
 document.getElementById("right"),
@@ -993,12 +1121,16 @@ document.getElementById("right"),
 
 
 
+
+
 document.getElementById("jump")
 .addEventListener("pointerdown",()=>{
 
-if(!falling)
 
-vy=jumpPower;
+    if(!falling)
+
+        vy=jumpPower;
+
 
 });
 
@@ -1006,8 +1138,15 @@ vy=jumpPower;
 
 
 
+
+
+
 update();
-  </script>
+
+
+</script>
+
 
 </body>
+
 </html>
