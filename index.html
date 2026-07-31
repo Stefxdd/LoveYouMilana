@@ -10,176 +10,151 @@
 <style>
 
 *{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
 
 body{
-
-    margin:0;
-    overflow:hidden;
-
-    background:
-    radial-gradient(circle at top,#6d287f,#09050d 70%);
-
-    font-family:Arial,sans-serif;
-    color:white;
-    text-align:center;
-
+margin:0;
+overflow:hidden;
+background:
+radial-gradient(circle,#702080,#09040d 70%);
+font-family:Arial,sans-serif;
+color:white;
+text-align:center;
 }
 
 
 h1{
-
-    margin:8px;
-
-    color:#ff8fc1;
-
-    text-shadow:
-    0 0 15px #ff3e96;
-
+margin:8px;
+color:#ff91c8;
+text-shadow:0 0 15px #ff3e96;
 }
 
 
 #hud{
-
-    display:flex;
-    justify-content:center;
-    gap:30px;
-
-    font-size:20px;
-
+display:flex;
+justify-content:center;
+gap:25px;
+font-size:20px;
 }
 
 
 #game{
 
-    position:relative;
+position:relative;
 
-    width:min(95vw,600px);
-    height:75vh;
+width:min(95vw,600px);
+height:75vh;
 
-    margin:auto;
+margin:auto;
 
-    overflow:hidden;
+overflow:hidden;
 
-    border:
-    3px solid #ff77c8;
+border:3px solid #ff75c8;
+border-radius:20px;
 
-    border-radius:20px;
+box-shadow:0 0 30px #ff3e96;
 
-
-    background:
-
-    linear-gradient(
-    #28103d,
-    #08050d
-    );
-
-    box-shadow:
-    0 0 30px #ff3e96;
+background:
+linear-gradient(#321344,#09050d);
 
 }
 
-
-/* scrolling world */
 
 #world{
 
-    position:absolute;
+position:absolute;
 
-    width:100%;
-    height:3000px;
+width:100%;
+height:4000px;
 
-    bottom:0;
-
-}
-
-
-/* platforms */
-
-.platform{
-
-    position:absolute;
-
-    height:18px;
-
-    background:
-    linear-gradient(
-    90deg,
-    #7628a5,
-    #ff73d1
-    );
-
-
-    border-radius:15px;
-
-    box-shadow:
-    0 0 15px #ff4ccf;
+bottom:0;
 
 }
 
-
-/* player */
 
 
 #player{
 
-    position:absolute;
+position:absolute;
 
-    width:55px;
-    height:55px;
+width:55px;
+height:55px;
 
+border-radius:50%;
 
-    border-radius:50%;
+background:url("IMG_9350.jpg");
 
+background-size:cover;
 
-    background-image:
-    url("IMG_9350.jpg");
+border:3px solid white;
 
+box-shadow:
+0 0 15px #ff4e9d,
+0 0 30px #ff4e9d;
 
-    background-size:cover;
-    background-position:center;
-
-
-    border:
-    3px solid white;
-
-
-    box-shadow:
-
-    0 0 15px #ff4e9d,
-    0 0 30px #ff4e9d;
+z-index:10;
 
 }
 
 
 
-/* hearts */
+.platform{
+
+position:absolute;
+
+height:18px;
+
+background:
+linear-gradient(90deg,#7628a5,#ff73d1);
+
+border-radius:20px;
+
+box-shadow:
+0 0 15px #ff4ccf;
+
+}
+
 
 
 .collectible{
 
-    position:absolute;
+position:absolute;
 
-    width:50px;
-    height:45px;
+width:50px;
+height:45px;
 
-
-    animation:
-    float 1s infinite alternate;
+animation:float 1s infinite alternate;
 
 }
 
 
-.heart{
+.collectible span{
 
-    position:absolute;
+font-size:25px;
 
-    right:0;
-    top:0;
+position:absolute;
 
-    font-size:25px;
+right:0;
+
+top:0;
+
+}
+
+
+.stef{
+
+width:38px;
+height:38px;
+
+border-radius:50%;
+
+background:url("stef.jpg");
+
+background-size:cover;
+
+border:2px solid white;
 
 }
 
@@ -199,100 +174,75 @@ transform:translateY(-8px);
 
 
 
-/* stef special */
-
-
-.stef{
-
-    width:38px;
-    height:38px;
-
-    border-radius:50%;
-
-    background-image:
-    url("stef.jpg");
-
-    background-size:cover;
-
-    border:
-    2px solid white;
-
-}
-
-
-/* controls */
-
-
 #controls{
 
-    margin-top:10px;
+margin-top:10px;
 
 }
 
 
 button{
 
-    width:90px;
-    height:55px;
+width:85px;
+height:55px;
 
-    margin:5px;
+margin:5px;
 
-    border:0;
+border:0;
 
-    border-radius:15px;
+border-radius:15px;
 
-    background:#d93689;
+background:#dc3988;
 
-    color:white;
+color:white;
 
-    font-size:25px;
+font-size:25px;
 
 }
 
 
 
-/* end */
-
 #endScreen{
 
-    display:none;
+display:none;
 
-    position:absolute;
+position:absolute;
 
-    inset:0;
+inset:0;
 
-    background:
-    rgba(0,0,0,.85);
+background:rgba(0,0,0,.85);
 
+justify-content:center;
 
-    justify-content:center;
-    align-items:center;
+align-items:center;
 
-    flex-direction:column;
+flex-direction:column;
+
+z-index:100;
 
 }
 
 
 #endScreen h2{
 
-    color:#ff8fc1;
+color:#ff91c8;
 
-    font-size:40px;
+font-size:40px;
 
 }
 
 
 a{
 
-    background:#e63d8f;
+background:#e63d8f;
 
-    padding:15px 30px;
+padding:15px 30px;
 
-    border-radius:30px;
+border-radius:30px;
 
-    color:white;
+color:white;
 
-    text-decoration:none;
+text-decoration:none;
 
 }
 
@@ -322,11 +272,11 @@ Lives:
 </div>
 
 
+
 <div id="game">
 
 
 <div id="world">
-
 
 <div id="player"></div>
 
@@ -368,4 +318,330 @@ Continue ❤️
 </div>
 
 
+
 <script>
+
+
+const world=document.getElementById("world");
+const game=document.getElementById("game");
+const player=document.getElementById("player");
+
+const scoreText=document.getElementById("score");
+const livesText=document.getElementById("lives");
+
+const end=document.getElementById("endScreen");
+
+
+let x=270;
+let y=100;
+
+let vx=0;
+let vy=0;
+
+
+let left=false;
+let right=false;
+
+
+let score=0;
+let lives=3;
+
+
+let camera=0;
+
+
+const gravity=-0.5;
+const jumpPower=13;
+
+
+
+// create platforms
+
+let platforms=[];
+
+
+for(let i=0;i<45;i++){
+
+let p=document.createElement("div");
+
+p.className="platform";
+
+
+let px=Math.random()*80;
+
+let py=i*90;
+
+
+p.style.left=px+"%";
+p.style.bottom=py+"px";
+p.style.width=(20+Math.random()*25)+"%";
+
+
+world.appendChild(p);
+
+platforms.push(p);
+
+}
+
+
+
+// create hearts
+
+
+for(let i=1;i<=30;i++){
+
+let c=document.createElement("div");
+
+c.className="collectible";
+
+
+c.style.left=Math.random()*85+"%";
+
+c.style.bottom=(i*120+60)+"px";
+
+
+if(i===15){
+
+c.innerHTML=
+`
+<div class="stef"></div>
+<span>❤️</span>
+`;
+
+}
+
+else{
+
+c.innerHTML="❤️";
+
+}
+
+
+world.appendChild(c);
+
+}
+
+
+
+
+
+function update(){
+
+
+vy+=gravity;
+
+
+x+=vx;
+
+y+=vy;
+
+
+
+// boundaries
+
+if(x<0)x=0;
+
+if(x>game.clientWidth-55)
+x=game.clientWidth-55;
+
+
+
+// platform collision
+
+
+platforms.forEach(p=>{
+
+
+let px=p.offsetLeft;
+
+let py=p.offsetTop;
+
+
+if(
+
+x+55>px &&
+x<px+p.offsetWidth &&
+
+y<py+20 &&
+y>py-10 &&
+
+vy<0
+
+){
+
+y=py+20;
+
+vy=jumpPower;
+
+}
+
+});
+
+
+
+
+// camera follows player
+
+
+if(y-camera>300){
+
+camera=y-300;
+
+world.style.bottom=-camera+"px";
+
+}
+
+
+
+// fall
+
+
+if(y<camera-100){
+
+lives--;
+
+updateLives();
+
+
+x=270;
+y=camera+100;
+
+vy=10;
+
+
+if(lives<=0){
+
+end.style.display="flex";
+
+}
+
+}
+
+
+
+
+// collect hearts
+
+
+document.querySelectorAll(".collectible")
+.forEach(c=>{
+
+
+let cx=c.offsetLeft;
+
+let cy=c.offsetTop;
+
+
+if(
+
+x+55>cx &&
+x<cx+50 &&
+
+y+55>cy &&
+y<cy+45
+
+){
+
+c.remove();
+
+score++;
+
+scoreText.textContent=score;
+
+
+if(score>=30){
+
+end.style.display="flex";
+
+}
+
+}
+
+
+});
+
+
+
+
+player.style.left=x+"px";
+
+player.style.bottom=y+"px";
+
+
+
+requestAnimationFrame(update);
+
+}
+
+
+
+
+function updateLives(){
+
+livesText.innerHTML=
+"❤️".repeat(lives)+
+"🖤".repeat(3-lives);
+
+}
+
+
+
+
+
+document.addEventListener("keydown",e=>{
+
+if(e.key=="ArrowLeft")
+left=true;
+
+if(e.key=="ArrowRight")
+right=true;
+
+if(e.key=="ArrowUp" && vy==0)
+vy=jumpPower;
+
+});
+
+
+
+document.addEventListener("keyup",e=>{
+
+if(e.key=="ArrowLeft")
+left=false;
+
+if(e.key=="ArrowRight")
+right=false;
+
+});
+
+
+
+
+
+function controls(){
+
+if(left)
+vx=-5;
+
+else if(right)
+vx=5;
+
+else
+vx*=0.8;
+
+
+requestAnimationFrame(controls);
+
+}
+
+
+controls();
+
+
+update();
+
+
+</script>
+
+
+</body>
+</html>
