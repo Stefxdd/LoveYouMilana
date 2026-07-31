@@ -1,156 +1,734 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Love You Milana ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
+<title>Catch My Hearts ❤️</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 25%, #54205f 0%, #19101e 45%, #08080d 100%);
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+h1 {
+    margin: 15px 10px 5px;
+    color: #ff8fbd;
+    text-shadow: 0 0 15px #ff4f9a;
+    font-size: clamp(24px, 5vw, 42px);
+}
+
+#info {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+#game {
+    position: relative;
+    width: min(900px, 96vw);
+    height: min(600px, 65vh);
+    overflow: hidden;
+    border: 3px solid #a94ed1;
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 50% 30%, rgba(193, 71, 205, 0.35), transparent 40%),
+        linear-gradient(#160c20, #07070c);
+    box-shadow:
+        0 0 25px rgba(211, 69, 223, 0.7),
+        inset 0 0 40px rgba(177, 53, 195, 0.25);
+}
+
+/* Background stars */
+
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+/* Player */
+
+#player {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    left: 50px;
+    bottom: 100px;
+    border-radius: 50%;
+    background: #ff72ad;
+    border: 3px solid white;
+    box-shadow:
+        0 0 15px #ff3d94,
+        0 0 30px #ff3d94;
+    z-index: 5;
+}
+
+#player::after {
+    content: "M";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+/* Platforms */
+
+.platform {
+    position: absolute;
+    height: 18px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #7f2db0, #ed66ff);
+    border: 2px solid #f0a1ff;
+    box-shadow:
+        0 0 12px #d94cff,
+        0 0 25px rgba(208, 58, 255, 0.6);
+}
+
+/* Hearts */
+
+.heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    font-size: 29px;
+    line-height: 30px;
+    text-align: center;
+    filter: drop-shadow(0 0 8px #ff3c8c);
+    animation: float 1.3s infinite alternate ease-in-out;
+    z-index: 4;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(0) scale(1);
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: black;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+    to {
+        transform: translateY(-8px) scale(1.12);
+    }
+}
+
+/* Phone controls */
+
+#controls {
+    width: min(500px, 96vw);
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.control {
+    width: 85px;
+    height: 58px;
+    border: 2px solid #ff9ac7;
+    border-radius: 16px;
+    color: white;
+    background: rgba(188, 45, 135, 0.75);
+    font-size: 25px;
+    box-shadow: 0 0 15px rgba(255, 70, 160, 0.6);
+    touch-action: none;
+}
+
+.control:active {
+    transform: scale(0.92);
+    background: #ff4f9a;
+}
+
+/* Win screen */
+
+#win {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: rgba(10, 5, 15, 0.94);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+}
+
+#win h2 {
+    color: #ff7eb7;
+    font-size: clamp(35px, 8vw, 65px);
+    text-shadow: 0 0 20px #ff3f96;
+    margin-bottom: 10px;
+}
+
+#win p {
+    font-size: 22px;
+}
+
+#restart {
+    margin-top: 15px;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    background: #d82d7d;
+    font-size: 18px;
+}
+
+@media (max-width: 600px) {
+
+    #game {
+        height: 65vh;
+        border-radius: 10px;
     }
 
-    /* Puzzle screen */
-    #puzzleScreen {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: black;
+    #controls {
+        position: fixed;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
-    #puzzle {
-      width: min(92vw, 500px);
-      aspect-ratio: 1 / 1;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      border: 3px solid white;
-    }
+}
 
-    .piece {
-      background-image: url("IMG_9350.jpg");
-      background-size: 300% 300%;
-      border: 1px solid rgba(255,255,255,0.5);
-      cursor: pointer;
-    }
-
-    /* Video screen */
-    #videoScreen {
-      display: none;
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
-      padding: 15px;
-
-      background-image: url("IMG_9350.jpg");
-      background-size: 180px;
-      background-repeat: repeat;
-    }
-
-    video {
-      width: 90%;
-      max-width: 700px;
-      max-height: 90vh;
-      border-radius: 15px;
-    }
-  </style>
-
+</style>
 </head>
 
 <body>
 
-  <!-- Puzzle -->
+<h1>Catch My Hearts ❤️</h1>
 
-  <div id="puzzleScreen">
-    <div id="puzzle"></div>
-  </div>
+<div id="info">
+    Hearts: <span id="score">0</span> / 10
+</div>
 
-  <!-- Video -->
+<div id="game">
 
-  <div id="videoScreen">
-    <video controls playsinline>
-      <source src="LoveYouMilanaaaaaa.mp4" type="video/mp4">
-    </video>
-  </div>
+    <div id="player"></div>
 
-  <script>
-    const puzzle = document.getElementById("puzzle");
-    const puzzleScreen = document.getElementById("puzzleScreen");
-    const videoScreen = document.getElementById("videoScreen");
+    <!-- Platforms -->
 
-    let pieces = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    let selectedPiece = null;
+    <div class="platform" style="left:3%; bottom:5%; width:25%;"></div>
 
-    pieces.sort(() => Math.random() - 0.5);
+    <div class="platform" style="left:34%; bottom:18%; width:18%;"></div>
 
-    function drawPuzzle() {
-      puzzle.innerHTML = "";
+    <div class="platform" style="left:60%; bottom:32%; width:18%;"></div>
 
-      pieces.forEach((number, index) => {
-        const piece = document.createElement("div");
+    <div class="platform" style="left:30%; bottom:45%; width:18%;"></div>
 
-        piece.className = "piece";
+    <div class="platform" style="left:5%; bottom:60%; width:20%;"></div>
 
-        const row = Math.floor(number / 3);
-        const column = number % 3;
+    <div class="platform" style="left:40%; bottom:68%; width:18%;"></div>
 
-        piece.style.backgroundPosition =
-          `${column * 50}% ${row * 50}%`;
+    <div class="platform" style="left:68%; bottom:76%; width:25%;"></div>
 
-        piece.addEventListener("click", () => {
+    <div class="platform" style="left:70%; bottom:12%; width:23%;"></div>
 
-          if (selectedPiece === null) {
-            selectedPiece = index;
-            piece.style.outline = "4px solid white";
+    <div class="platform" style="left:48%; bottom:5%; width:17%;"></div>
 
-          } else {
 
-            [pieces[selectedPiece], pieces[index]] =
-            [pieces[index], pieces[selectedPiece]];
+    <div id="win">
 
-            selectedPiece = null;
+        <div>
 
-            drawPuzzle();
-            checkPuzzle();
-          }
+            <h2>You caught them all ❤️</h2>
 
-        });
+            <p>
+                All 10 hearts belong to you, Milana 🥹
+            </p>
 
-        puzzle.appendChild(piece);
-      });
+            <button id="restart">
+                Play again ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="controls">
+
+<button class="control" id="left">←</button>
+
+<button class="control" id="jump">↑</button>
+
+<button class="control" id="right">→</button>
+
+</div>
+
+
+<script>
+
+const game = document.getElementById("game");
+
+const player = document.getElementById("player");
+
+const scoreText = document.getElementById("score");
+
+const win = document.getElementById("win");
+
+
+let x = 50;
+
+let y = 100;
+
+let velocityX = 0;
+
+let velocityY = 0;
+
+let leftPressed = false;
+
+let rightPressed = false;
+
+let jumpPressed = false;
+
+let onGround = false;
+
+let score = 0;
+
+const gravity = 0.65;
+
+const moveSpeed = 5;
+
+const jumpPower = 13;
+
+
+const heartPositions = [
+
+    [18, 12],
+
+    [40, 25],
+
+    [68, 39],
+
+    [40, 52],
+
+    [13, 67],
+
+    [48, 75],
+
+    [78, 84],
+
+    [81, 19],
+
+    [56, 12],
+
+    [72, 45]
+
+];
+
+
+heartPositions.forEach((position, index) => {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML = "❤️";
+
+    heart.dataset.number = index;
+
+    heart.style.left = position[0] + "%";
+
+    heart.style.bottom = position[1] + "%";
+
+    game.appendChild(heart);
+
+});
+
+
+function updateGame() {
+
+    const gameWidth = game.clientWidth;
+
+    const gameHeight = game.clientHeight;
+
+
+    if(leftPressed) {
+
+        velocityX = -moveSpeed;
+
     }
 
-    function checkPuzzle() {
+    else if(rightPressed) {
 
-      const solved = pieces.every(
-        (piece, index) => piece === index
-      );
-
-      if (solved) {
-
-        setTimeout(() => {
-
-          puzzleScreen.style.display = "none";
-
-          videoScreen.style.display = "flex";
-
-        }, 500);
-
-      }
+        velocityX = moveSpeed;
 
     }
 
-    drawPuzzle();
-  </script>
+    else {
+
+        velocityX *= 0.75;
+
+    }
+
+
+    if(jumpPressed && onGround) {
+
+        velocityY = jumpPower;
+
+        onGround = false;
+
+    }
+
+
+    jumpPressed = false;
+
+
+    velocityY -= gravity;
+
+
+    x += velocityX;
+
+    y += velocityY;
+
+
+    if(x < 0) x = 0;
+
+    if(x > gameWidth - 42) {
+
+        x = gameWidth - 42;
+
+    }
+
+
+    onGround = false;
+
+
+    const playerBottom = y;
+
+    const playerTop = y + 42;
+
+    const playerLeft = x;
+
+    const playerRight = x + 42;
+
+
+    document.querySelectorAll(".platform").forEach(platform => {
+
+        const platformX = platform.offsetLeft;
+
+        const platformY = platform.offsetTop;
+
+        const platformWidth = platform.offsetWidth;
+
+
+        const platformBottom =
+        gameHeight - platformY;
+
+
+        const platformTop =
+        platformBottom + 18;
+
+
+        if(
+
+            playerRight > platformX &&
+
+            playerLeft < platformX + platformWidth &&
+
+            playerBottom <= platformTop &&
+
+            playerBottom >= platformBottom - 20 &&
+
+            velocityY <= 0
+
+        ) {
+
+            y = platformTop;
+
+            velocityY = 0;
+
+            onGround = true;
+
+        }
+
+    });
+
+
+    if(y < 0) {
+
+        y = 0;
+
+        velocityY = 0;
+
+        onGround = true;
+
+    }
+
+
+    if(y > gameHeight) {
+
+        y = gameHeight - 42;
+
+        velocityY = 0;
+
+    }
+
+
+    player.style.left = x + "px";
+
+    player.style.bottom = y + "px";
+
+
+    checkHearts();
+
+
+    requestAnimationFrame(updateGame);
+
+}
+
+
+function checkHearts() {
+
+    document.querySelectorAll(".heart").forEach(heart => {
+
+        const heartX = heart.offsetLeft;
+
+        const heartY = heart.offsetTop;
+
+
+        if(
+
+            x + 42 > heartX &&
+
+            x < heartX + 30 &&
+
+            game.clientHeight - y >
+
+            heartY &&
+
+            game.clientHeight - y - 42 <
+
+            heartY + 30
+
+        ) {
+
+            heart.remove();
+
+            score++;
+
+            scoreText.textContent = score;
+
+
+            if(score >= 10) {
+
+                win.style.display = "flex";
+
+            }
+
+        }
+
+    });
+
+}
+
+
+document.addEventListener("keydown", event => {
+
+    if(
+
+        event.key === "ArrowLeft" ||
+
+        event.key.toLowerCase() === "a"
+
+    ) {
+
+        leftPressed = true;
+
+    }
+
+
+    if(
+
+        event.key === "ArrowRight" ||
+
+        event.key.toLowerCase() === "d"
+
+    ) {
+
+        rightPressed = true;
+
+    }
+
+
+    if(
+
+        event.key === "ArrowUp" ||
+
+        event.key === " " ||
+
+        event.key.toLowerCase() === "w"
+
+    ) {
+
+        jumpPressed = true;
+
+    }
+
+});
+
+
+document.addEventListener("keyup", event => {
+
+    if(
+
+        event.key === "ArrowLeft" ||
+
+        event.key.toLowerCase() === "a"
+
+    ) {
+
+        leftPressed = false;
+
+    }
+
+
+    if(
+
+        event.key === "ArrowRight" ||
+
+        event.key.toLowerCase() === "d"
+
+    ) {
+
+        rightPressed = false;
+
+    }
+
+});
+
+
+function holdButton(
+
+    button,
+
+    start,
+
+    stop
+
+) {
+
+    button.addEventListener(
+
+        "pointerdown",
+
+        event => {
+
+            event.preventDefault();
+
+            start();
+
+        }
+
+    );
+
+
+    button.addEventListener(
+
+        "pointerup",
+
+        stop
+
+    );
+
+
+    button.addEventListener(
+
+        "pointercancel",
+
+        stop
+
+    );
+
+
+    button.addEventListener(
+
+        "pointerleave",
+
+        stop
+
+    );
+
+}
+
+
+holdButton(
+
+    document.getElementById("left"),
+
+    () => leftPressed = true,
+
+    () => leftPressed = false
+
+);
+
+
+holdButton(
+
+    document.getElementById("right"),
+
+    () => rightPressed = true,
+
+    () => rightPressed = false
+
+);
+
+
+document
+
+.getElementById("jump")
+
+.addEventListener(
+
+    "pointerdown",
+
+    event => {
+
+        event.preventDefault();
+
+        jumpPressed = true;
+
+    }
+
+);
+
+
+document
+
+.getElementById("restart")
+
+.addEventListener(
+
+    "click",
+
+    () => location.reload()
+
+);
+
+
+updateGame();
+
+</script>
 
 </body>
 </html>
