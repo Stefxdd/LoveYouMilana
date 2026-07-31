@@ -1,397 +1,904 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heart Climb</title>
-<link rel="stylesheet" href="style.css">
+
+<title>Catch My Hearts ❤️</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+margin:0;
+overflow:hidden;
+background:
+radial-gradient(circle at top,#76278f,#09050d 70%);
+color:white;
+font-family:Arial,sans-serif;
+text-align:center;
+}
+
+h1{
+margin:8px;
+color:#ff91c8;
+text-shadow:0 0 15px #ff3e96;
+}
+
+#hud{
+display:flex;
+justify-content:center;
+gap:30px;
+font-size:20px;
+}
+
+#game{
+position:relative;
+width:min(95vw,600px);
+height:75vh;
+margin:auto;
+overflow:hidden;
+border:3px solid #ff75c8;
+border-radius:20px;
+background:
+linear-gradient(#29103d,#07050b);
+box-shadow:0 0 30px #ff3e96;
+}
+
+#world{
+position:absolute;
+width:100%;
+height:10000px;
+bottom:0;
+}
+
+#player{
+position:absolute;
+width:55px;
+height:55px;
+border-radius:50%;
+background-image:url("IMG_9350.jpg");
+background-size:cover;
+background-position:center;
+border:3px solid white;
+box-shadow:
+0 0 15px #ff4e9d,
+0 0 30px #ff4e9d;
+z-index:20;
+}
+
+.falling{
+animation:fallAway 1s forwards;
+}
+
+@keyframes fallAway{
+0%{
+transform:rotate(0deg) scale(1);
+opacity:1;
+}
+100%{
+transform:
+rotate(720deg)
+translateY(180px)
+scale(.3);
+opacity:0;
+}
+}
+
+.platform{
+position:absolute;
+height:18px;
+border-radius:15px;
+background:
+linear-gradient(
+90deg,
+#7628a5,
+#ff73d1
+);
+box-shadow:
+0 0 15px #ff4ccf;
+}
+
+.collectible{
+position:absolute;
+width:70px;
+height:50px;
+animation:float 1s infinite alternate;
+z-index:10;
+}
+
+.stef{
+width:42px;
+height:42px;
+border-radius:50%;
+background-image:url("stef.jpg");
+background-size:120%;
+background-position:center 65%;
+background-repeat:no-repeat;
+border:2px solid white;
+box-shadow:
+0 0 12px #ff4e9d;
+}
+
+.collectible span{
+position:absolute;
+right:0;
+top:-5px;
+font-size:28px;
+filter:drop-shadow(0 0 7px pink);
+}
+
+@keyframes float{
+from{
+transform:translateY(0);
+}
+to{
+transform:translateY(-8px);
+}
+}
+
+#controls{
+margin-top:10px;
+}
+
+button{
+width:90px;
+height:55px;
+margin:5px;
+border:0;
+border-radius:15px;
+background:#dc3988;
+color:white;
+font-size:25px;
+}
+
+#endScreen{
+display:none;
+position:absolute;
+inset:0;
+z-index:100;
+background:rgba(0,0,0,.85);
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+#endScreen h2{
+color:#ff91c8;
+font-size:40px;
+}
+
+#endScreen a{
+background:#e63d8f;
+padding:15px 30px;
+border-radius:30px;
+color:white;
+text-decoration:none;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<div id="game">
+<h1>Catch My Hearts ❤️</h1>
 
-    <div id="top">
-        <div id="heartsLeft">❤️❤️❤️</div>
-        <div id="score">0 / 30</div>
-    </div>
+<div id="hud">
 
-    <canvas id="gameCanvas"></canvas>
+<div>
+❤️ <span id="score">0</span>/30
+</div>
 
-    <div id="deathScreen" class="hidden">
-        <h1>Game Over 💔</h1>
-        <button id="restartBtn">Try Again 🔄</button>
-    </div>
-
-    <div id="winScreen" class="hidden">
-        <h1>Bravo Milana! ❤️</h1>
-        <button id="continueBtn">Continue ➜</button>
-    </div>
+<div>
+Lives:
+<span id="lives">
+❤️❤️❤️
+</span>
+</div>
 
 </div>
 
-<script src="game.js"></script>
 
-</body>
-</html>
-/* style.css */
+<div id="game">
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<div id="world">
 
-body {
-    background: #111;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-}
+<div id="player"></div>
 
-#game {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+</div>
 
-#gameCanvas {
-    background: linear-gradient(#87ceeb, #dff6ff);
-    width: 100%;
-    height: 100%;
-    display: block;
-}
 
-#top {
-    position: absolute;
-    top: 20px;
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    z-index: 5;
-    font-size: 25px;
-    color: white;
-    text-shadow: 2px 2px 5px black;
-}
+<div id="endScreen">
 
-#deathScreen,
-#winScreen {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    z-index: 10;
-    color: white;
-}
+<h2 id="endTitle">
+Bravo Milana ❤️
+</h2>
 
-.hidden {
-    display: none !important;
-}
+<p id="endText">
+You found all my hearts 🥹
+</p>
 
-h1 {
-    font-size: 45px;
-    text-align: center;
-}
+<a id="endButton" href="#">
+Continue ❤️
+</a>
 
-button {
-    padding: 15px 35px;
-    border: none;
-    border-radius: 15px;
-    font-size: 25px;
-    cursor: pointer;
-    background: white;
-    color: black;
-    font-weight: bold;
-}
+</div>
 
-button:active {
-    transform: scale(0.95);
-}
+</div>
 
-@media (max-width:600px) {
-    h1 {
-        font-size: 32px;
-    }
 
-    button {
-        font-size: 20px;
-    }
-}
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+<div id="controls">
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+<button id="left">
+←
+</button>
 
-const deathScreen = document.getElementById("deathScreen");
-const winScreen = document.getElementById("winScreen");
-const restartBtn = document.getElementById("restartBtn");
-const continueBtn = document.getElementById("continueBtn");
+<button id="jump">
+↑
+</button>
+
+<button id="right">
+→
+</button>
+
+</div>
+<script>
+
+const game = document.getElementById("game");
+const world = document.getElementById("world");
+const player = document.getElementById("player");
 
 const scoreText = document.getElementById("score");
-const heartsLeft = document.getElementById("heartsLeft");
+const livesText = document.getElementById("lives");
 
-let player;
-let platforms;
-let hearts;
-let score;
-let lives;
-let gameRunning;
-let keys = {};
-
-function startGame() {
-
-    player = {
-        x: canvas.width / 2,
-        y: canvas.height - 150,
-        width: 45,
-        height: 45,
-        velocityY: 0,
-        speed: 6,
-        jumping: false
-    };
-
-    platforms = [];
-    hearts = [];
-
-    score = 0;
-    lives = 3;
-    gameRunning = true;
-
-    deathScreen.classList.add("hidden");
-    winScreen.classList.add("hidden");
-
-    createLevel();
-
-    updateUI();
-
-    requestAnimationFrame(gameLoop);
-}
+const endScreen = document.getElementById("endScreen");
+const endTitle = document.getElementById("endTitle");
+const endText = document.getElementById("endText");
+const endButton = document.getElementById("endButton");
 
 
-function createLevel() {
+let x = 270;
+let y = 80;
 
-    let y = canvas.height - 80;
+let vx = 0;
+let vy = 0;
 
-    for(let i = 0; i < 45; i++) {
+let camera = 0;
 
-        let platform = {
-            x: Math.random() * (canvas.width - 120),
-            y: y - i * 100,
-            width: 120,
-            height: 15
-        };
+let score = 0;
+let lives = 3;
 
-        platforms.push(platform);
+let falling = false;
+let gameFinished = false;
 
-        if(i % 2 === 0) {
+let grounded = false;
 
-            hearts.push({
-                x: platform.x + 45,
-                y: platform.y - 35,
-                collected:false
-            });
-
-        }
-    }
-}
+let left=false;
+let right=false;
 
 
-function updateUI(){
+const gravity=-0.55;
+const jumpPower=14;
 
-    scoreText.innerHTML = `${score} / 30`;
 
-    heartsLeft.innerHTML =
-        "❤️".repeat(lives);
+let lastSafeX=x;
+let lastSafeY=40;
+
+
+let platforms=[];
+
+
+for(let i=0;i<80;i++){
+
+let platform=document.createElement("div");
+
+platform.className="platform";
+
+platform.style.width =
+(100+Math.random()*90)+"px";
+
+platform.style.left =
+(15+Math.random()*60)+"%";
+
+platform.style.bottom =
+(i*110)+"px";
+
+
+world.appendChild(platform);
+
+platforms.push(platform);
 
 }
 
 
-function gameLoop(){
 
-    if(!gameRunning) return;
+function updateLives(){
 
-    update();
-    draw();
+livesText.innerHTML =
+"❤️".repeat(lives)+
+"🖤".repeat(3-lives);
 
-    requestAnimationFrame(gameLoop);
 }
+
+
+
+function respawn(){
+
+player.classList.remove("falling");
+
+x=lastSafeX;
+
+y=lastSafeY+25;
+
+vx=0;
+vy=0;
+
+camera=Math.max(0,lastSafeY-300);
+
+world.style.bottom=-camera+"px";
+
+player.style.opacity="1";
+player.style.transform="none";
+
+falling=false;
+
+}
+
+
+
+
+
+function loseLife(){
+
+if(gameFinished || falling)
+return;
+
+
+lives--;
+
+updateLives();
+
+
+falling=true;
+
+player.classList.add("falling");
+
+
+
+if(lives<=0){
+
+gameFinished=true;
+
+
+setTimeout(()=>{
+
+endScreen.style.display="flex";
+
+endTitle.innerHTML="Game Over 😭";
+
+endText.innerHTML="You almost got them ❤️";
+
+
+// FIXED DEATH BUTTON ONLY
+
+endButton.innerHTML="Try Again 🔄";
+
+endButton.removeAttribute("href");
+
+
+endButton.onclick=function(e){
+
+e.preventDefault();
+
+location.reload();
+
+};
+
+
+},1000);
+
+
+return;
+
+}
+
+
+
+
+
+setTimeout(()=>{
+
+respawn();
+
+},1000);
+
+
+}
+
+
+
+
+
+function win(){
+
+if(gameFinished)
+return;
+
+
+gameFinished=true;
+
+
+endScreen.style.display="flex";
+
+
+endTitle.innerHTML="Bravo Milana ❤️";
+
+endText.innerHTML="You found all my hearts 🥹";
+
+
+endButton.innerHTML="Continue ❤️";
+
+
+endButton.href=
+"https://stefxdd.github.io/MilanaEstiBravo/LoveYouMilana.html";
+
+}
+
 
 
 function update(){
 
-    if(keys["ArrowLeft"]){
-        player.x -= player.speed;
-    }
 
-    if(keys["ArrowRight"]){
-        player.x += player.speed;
-    }
+if(gameFinished){
 
+requestAnimationFrame(update);
 
-    player.velocityY += 0.5;
-    player.y += player.velocityY;
-
-
-    platforms.forEach(p=>{
-
-        if(
-            player.x < p.x+p.width &&
-            player.x+player.width > p.x &&
-            player.y+player.height > p.y &&
-            player.y+player.height < p.y+20 &&
-            player.velocityY > 0
-        ){
-
-            player.velocityY = -13;
-        }
-
-    });
-
-
-    hearts.forEach(h=>{
-
-        if(!h.collected &&
-            player.x < h.x+25 &&
-            player.x+player.width > h.x &&
-            player.y < h.y+25 &&
-            player.y+player.height > h.y
-        ){
-
-            h.collected=true;
-            score++;
-
-            updateUI();
-
-            if(score >= 30){
-                winGame();
-            }
-        }
-
-    });
-
-
-    // FALLING OFF = LOSE LIFE
-    if(player.y > canvas.height + 100){
-
-        lives--;
-
-        updateUI();
-
-        if(lives <= 0){
-            loseGame();
-        }
-        else{
-
-            player.x = canvas.width/2;
-            player.y = canvas.height-150;
-            player.velocityY = 0;
-
-        }
-
-    }
+return;
 
 }
 
 
-function draw(){
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-
-    ctx.fillStyle="brown";
-
-    platforms.forEach(p=>{
-        ctx.fillRect(
-            p.x,
-            p.y,
-            p.width,
-            p.height
-        );
-    });
+grounded=false;
 
 
-    hearts.forEach(h=>{
 
-        if(!h.collected){
+if(left)
 
-            ctx.font="30px Arial";
-            ctx.fillText(
-                "❤️",
-                h.x,
-                h.y
-            );
+vx=-5;
 
-        }
+else if(right)
 
-    });
+vx=5;
+
+else
+
+vx*=0.8;
 
 
-    ctx.fillStyle="pink";
 
-    ctx.fillRect(
-        player.x,
-        player.y,
-        player.width,
-        player.height
-    );
+vy+=gravity;
+
+x+=vx;
+
+y+=vy;
+
+
+
+if(x<0)
+
+x=0;
+
+
+if(x>game.clientWidth-55)
+
+x=game.clientWidth-55;
+
+
+
+platforms.forEach(platform=>{
+
+
+let px=platform.offsetLeft;
+
+let py=parseInt(platform.style.bottom);
+
+
+
+if(
+
+x+55>px &&
+
+x<px+platform.offsetWidth &&
+
+y<=py+18 &&
+
+y>=py-15 &&
+
+vy<0
+
+){
+
+
+y=py+18;
+
+vy=jumpPower;
+
+grounded=true;
+
+
+
+if(y>lastSafeY){
+
+lastSafeX=x;
+
+lastSafeY=y;
+
+}
 
 }
 
 
-function loseGame(){
-
-    gameRunning=false;
-
-    deathScreen.classList.remove("hidden");
-
-}
+});
 
 
-function winGame(){
 
-    gameRunning=false;
+if(y-camera>300){
 
-    winScreen.classList.remove("hidden");
+camera=y-300;
+
+world.style.bottom=-camera+"px";
 
 }
 
 
-restartBtn.onclick=function(){
 
-    startGame();
+if(y<camera-250 && !falling){
+
+loseLife();
+
+}
+
+
+
+player.style.left=x+"px";
+
+player.style.bottom=y+"px";
+
+
+requestAnimationFrame(update);
+
+
+}
+    
+// HEARTS
+
+let hearts=[];
+
+
+for(let i=1;i<=50;i++){
+
+
+let heart=document.createElement("div");
+
+
+heart.className="collectible";
+
+
+
+heart.style.left=
+(10+Math.random()*70)+"%";
+
+
+
+heart.style.bottom=
+(i*170+100)+"px";
+
+
+
+
+heart.innerHTML=`
+
+<div class="stef"></div>
+
+<span>❤️</span>
+
+`;
+
+
+
+world.appendChild(heart);
+
+
+hearts.push(heart);
+
+
+}
+
+
+
+
+
+
+
+function collectHearts(){
+
+
+hearts.forEach((heart,index)=>{
+
+
+if(!heart)
+
+return;
+
+
+
+let ix=heart.offsetLeft;
+
+
+let iy=parseInt(heart.style.bottom);
+
+
+
+
+
+if(
+
+x+55>ix &&
+
+x<ix+70 &&
+
+
+y+55>iy &&
+
+y<iy+50
+
+){
+
+
+heart.remove();
+
+
+hearts[index]=null;
+
+
+
+score++;
+
+
+scoreText.innerHTML=score;
+
+
+
+
+if(score>=30){
+
+
+win();
+
+
+}
+
+
+
+}
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// add collecting to game loop
+
+const oldUpdate=update;
+
+
+update=function(){
+
+
+collectHearts();
+
+
+oldUpdate();
+
 
 };
 
 
-continueBtn.onclick=function(){
 
-    window.location.href="next.html";
 
-};
+
+
+
+
+
+// KEYBOARD CONTROLS
 
 
 document.addEventListener("keydown",e=>{
-    keys[e.key]=true;
+
+
+if(e.key==="ArrowLeft")
+
+left=true;
+
+
+
+if(e.key==="ArrowRight")
+
+right=true;
+
+
+
+
+
+if(
+
+e.key==="ArrowUp" &&
+
+grounded &&
+
+!falling
+
+){
+
+
+vy=jumpPower;
+
+
+grounded=false;
+
+
+}
+
+
 });
+
+
+
+
+
+
+
+
 
 document.addEventListener("keyup",e=>{
-    keys[e.key]=false;
+
+
+if(e.key==="ArrowLeft")
+
+left=false;
+
+
+
+if(e.key==="ArrowRight")
+
+right=false;
+
+
+
 });
 
 
-window.onresize=function(){
-
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
-
-};
 
 
-startGame();
+
+
+
+
+
+// MOBILE BUTTONS
+
+
+function hold(button,press,release){
+
+
+button.addEventListener("pointerdown",e=>{
+
+
+e.preventDefault();
+
+
+press();
+
+
+});
+
+
+
+button.addEventListener("pointerup",release);
+
+
+button.addEventListener("pointerleave",release);
+
+
+}
+
+
+
+
+
+
+
+hold(
+
+document.getElementById("left"),
+
+()=>left=true,
+
+()=>left=false
+
+);
+
+
+
+
+
+
+
+hold(
+
+document.getElementById("right"),
+
+()=>right=true,
+
+()=>right=false
+
+);
+
+
+
+
+
+
+
+document.getElementById("jump")
+.addEventListener("pointerdown",()=>{
+
+
+if(grounded && !falling){
+
+
+vy=jumpPower;
+
+
+grounded=false;
+
+
+}
+
+
+});
+
+
+
+
+
+
+
+update();
+
+
+</script>
+
+
+</body>
+
+</html>
