@@ -1,366 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Catch Me ❤️</title>
+<title>Catch My Hearts ❤️</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    overflow: hidden;
-    background:
-        radial-gradient(circle at 50% 20%, #5a216c, #170d20 55%, #07070b);
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
+body{
 
-h1 {
-    margin: 10px 0 4px;
-    color: #ff8fc1;
-    font-size: clamp(24px, 5vw, 42px);
-    text-shadow: 0 0 15px #ff3e96;
-}
-
-#hud {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    font-size: clamp(17px, 4vw, 23px);
-    margin-bottom: 8px;
-}
-
-#game {
-    position: relative;
-    width: min(950px, 96vw);
-    height: min(620px, 68vh);
-    margin: auto;
-    overflow: hidden;
-    border: 3px solid #b44ce0;
-    border-radius: 18px;
-    background:
-        radial-gradient(
-            circle at 50% 25%,
-            rgba(207, 70, 221, 0.25),
-            transparent 45%
-        ),
-        linear-gradient(#160b20, #06060a);
-
-    box-shadow:
-        0 0 25px rgba(213, 68, 230, 0.65),
-        inset 0 0 35px rgba(186, 48, 210, 0.2);
-}
-
-/* Milana */
-
-#player {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    left: 40px;
-    bottom: 45px;
-
-    border-radius: 50%;
-
-    background-image: url("IMG_9350.jpg");
-    background-size: cover;
-    background-position: center;
-
-    border: 3px solid white;
-
-    box-shadow:
-        0 0 15px #ff4e9d,
-        0 0 30px #ff4e9d;
-
-    z-index: 10;
-}
-
-/* Platforms */
-
-.platform {
-    position: absolute;
-    height: 18px;
-
-    border: 2px solid #f0a4ff;
-
-    border-radius: 12px;
+    margin:0;
+    overflow:hidden;
 
     background:
-        linear-gradient(
-            90deg,
-            #7628a5,
-            #ed65ff
-        );
+    radial-gradient(circle at top,#6d287f,#09050d 70%);
 
-    box-shadow:
-        0 0 12px #d94cff,
-        0 0 25px rgba(210, 55, 255, 0.6);
-}
-
-/* Stefan + heart */
-
-.collectible {
-    position: absolute;
-
-    width: 48px;
-    height: 40px;
-
-    z-index: 5;
-
-    animation:
-        float 1.2s infinite alternate ease-in-out;
-}
-
-.stef-pic {
-    position: absolute;
-
-    width: 35px;
-    height: 35px;
-
-    left: 0;
-    top: 2px;
-
-    border-radius: 50%;
-
-    background-image: url("stef.jpg");
-    background-size: cover;
-    background-position: center;
-
-    border: 2px solid white;
-
-    box-shadow:
-        0 0 10px #ff4b9c;
-}
-
-.heart {
-    position: absolute;
-
-    right: 0;
-    top: 0;
-
-    font-size: 22px;
-
-    filter:
-        drop-shadow(0 0 6px #ff2e8a);
-}
-
-@keyframes float {
-
-    from {
-        transform:
-        translateY(0);
-    }
-
-    to {
-        transform:
-        translateY(-7px);
-    }
+    font-family:Arial,sans-serif;
+    color:white;
+    text-align:center;
 
 }
 
-/* Message */
 
-#message {
-    position: absolute;
+h1{
 
-    left: 50%;
-    top: 15%;
+    margin:8px;
 
-    transform:
-    translateX(-50%);
-
-    color: #ff9ac8;
-
-    font-size:
-    clamp(22px, 5vw, 40px);
-
-    font-weight: bold;
+    color:#ff8fc1;
 
     text-shadow:
-    0 0 15px #ff3f96;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    z-index: 30;
-}
-
-.show-message {
-    animation:
-    message 0.8s ease;
-}
-
-@keyframes message {
-
-    0% {
-        opacity: 0;
-        transform:
-        translateX(-50%)
-        scale(0.5);
-    }
-
-    30% {
-        opacity: 1;
-        transform:
-        translateX(-50%)
-        scale(1.15);
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-        translateX(-50%)
-        scale(1);
-    }
+    0 0 15px #ff3e96;
 
 }
 
-/* End screen */
 
-#endScreen {
-    display: none;
+#hud{
 
-    position: absolute;
+    display:flex;
+    justify-content:center;
+    gap:30px;
 
-    inset: 0;
+    font-size:20px;
 
-    z-index: 50;
-
-    background:
-    rgba(8, 4, 13, 0.95);
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 25px;
 }
 
-#endScreen h2 {
-    color: #ff83bb;
 
-    font-size:
-    clamp(34px, 8vw, 65px);
+#game{
 
-    text-shadow:
-    0 0 20px #ff3d95;
-}
+    position:relative;
 
-#endScreen p {
-    font-size:
-    clamp(18px, 4vw, 25px);
-}
+    width:min(95vw,600px);
+    height:75vh;
 
-#continueButton,
-#restartButton {
-    margin-top: 15px;
+    margin:auto;
 
-    padding:
-    15px 30px;
-
-    border: 0;
-
-    border-radius: 25px;
-
-    color: white;
-
-    background:
-    #dc347f;
-
-    font-size: 20px;
-
-    text-decoration: none;
-
-    box-shadow:
-    0 0 18px #ff3d95;
-}
-
-/* Phone controls */
-
-#controls {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 14px;
-
-    margin: 10px auto;
-}
-
-.control {
-    width: 88px;
-
-    height: 58px;
+    overflow:hidden;
 
     border:
-    2px solid #ff9ac7;
+    3px solid #ff77c8;
 
-    border-radius: 16px;
+    border-radius:20px;
+
 
     background:
-    rgba(187, 42, 135, 0.8);
 
-    color: white;
-
-    font-size: 26px;
-
-    touch-action: none;
+    linear-gradient(
+    #28103d,
+    #08050d
+    );
 
     box-shadow:
-    0 0 14px rgba(
-        255,
-        65,
-        155,
-        0.6
+    0 0 30px #ff3e96;
+
+}
+
+
+/* scrolling world */
+
+#world{
+
+    position:absolute;
+
+    width:100%;
+    height:3000px;
+
+    bottom:0;
+
+}
+
+
+/* platforms */
+
+.platform{
+
+    position:absolute;
+
+    height:18px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #7628a5,
+    #ff73d1
     );
-}
 
-.control:active {
-    transform:
-    scale(0.92);
-}
 
-@media (max-width: 600px) {
+    border-radius:15px;
 
-    #game {
-        height: 66vh;
-
-        border-radius: 10px;
-    }
-
-    #controls {
-        position: fixed;
-
-        left: 50%;
-
-        bottom: 7px;
-
-        transform:
-        translateX(-50%);
-    }
+    box-shadow:
+    0 0 15px #ff4ccf;
 
 }
+
+
+/* player */
+
+
+#player{
+
+    position:absolute;
+
+    width:55px;
+    height:55px;
+
+
+    border-radius:50%;
+
+
+    background-image:
+    url("IMG_9350.jpg");
+
+
+    background-size:cover;
+    background-position:center;
+
+
+    border:
+    3px solid white;
+
+
+    box-shadow:
+
+    0 0 15px #ff4e9d,
+    0 0 30px #ff4e9d;
+
+}
+
+
+
+/* hearts */
+
+
+.collectible{
+
+    position:absolute;
+
+    width:50px;
+    height:45px;
+
+
+    animation:
+    float 1s infinite alternate;
+
+}
+
+
+.heart{
+
+    position:absolute;
+
+    right:0;
+    top:0;
+
+    font-size:25px;
+
+}
+
+
+
+@keyframes float{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-8px);
+}
+
+}
+
+
+
+/* stef special */
+
+
+.stef{
+
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    background-image:
+    url("stef.jpg");
+
+    background-size:cover;
+
+    border:
+    2px solid white;
+
+}
+
+
+/* controls */
+
+
+#controls{
+
+    margin-top:10px;
+
+}
+
+
+button{
+
+    width:90px;
+    height:55px;
+
+    margin:5px;
+
+    border:0;
+
+    border-radius:15px;
+
+    background:#d93689;
+
+    color:white;
+
+    font-size:25px;
+
+}
+
+
+
+/* end */
+
+#endScreen{
+
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,.85);
+
+
+    justify-content:center;
+    align-items:center;
+
+    flex-direction:column;
+
+}
+
+
+#endScreen h2{
+
+    color:#ff8fc1;
+
+    font-size:40px;
+
+}
+
+
+a{
+
+    background:#e63d8f;
+
+    padding:15px 30px;
+
+    border-radius:30px;
+
+    color:white;
+
+    text-decoration:none;
+
+}
+
+
 </style>
+
 </head>
+
 
 <body>
 
-<h1>Catch Me ❤️</h1>
+
+<h1>Catch My Hearts ❤️</h1>
+
 
 <div id="hud">
 
 <div>
-Caught:
-<span id="score">0</span>/30
+❤️ <span id="score">0</span>/30
 </div>
 
 <div>
@@ -370,729 +321,51 @@ Lives:
 
 </div>
 
+
 <div id="game">
+
+
+<div id="world">
+
 
 <div id="player"></div>
 
-<div id="message">
-You caught me! ❤️
+
 </div>
 
-<!-- Platforms -->
-
-<div class="platform"
-style="left:0%;bottom:4%;width:27%;">
-</div>
-
-<div class="platform"
-style="left:34%;bottom:16%;width:19%;">
-</div>
-
-<div class="platform"
-style="left:62%;bottom:10%;width:30%;">
-</div>
-
-<div class="platform"
-style="left:69%;bottom:31%;width:22%;">
-</div>
-
-<div class="platform"
-style="left:40%;bottom:38%;width:19%;">
-</div>
-
-<div class="platform"
-style="left:10%;bottom:49%;width:22%;">
-</div>
-
-<div class="platform"
-style="left:38%;bottom:61%;width:19%;">
-</div>
-
-<div class="platform"
-style="left:68%;bottom:70%;width:25%;">
-</div>
-
-<div class="platform"
-style="left:31%;bottom:80%;width:22%;">
-</div>
-
-<div class="platform"
-style="left:4%;bottom:70%;width:20%;">
-</div>
 
 <div id="endScreen">
 
-<div id="winContent">
-
 <h2>
-You caught me 30 times ❤️
+Bravo Milana ❤️
 </h2>
 
 <p>
-Now there is one more thing
-waiting for you 🥹
+You found all my hearts 🥹
 </p>
 
-<a
-id="continueButton"
-href="https://stefxdd.github.io/puzzle.webp/"
->
+
+<a href="https://stefxdd.github.io/MilanaEstiBravo/LoveYouMilana.html">
 Continue ❤️
 </a>
 
-</div>
-
-<div
-id="loseContent"
-style="display:none;"
->
-
-<h2>
-You ran out of lives 😭
-</h2>
-
-<p>
-Try catching me again ❤️
-</p>
-
-<button id="restartButton">
-Try Again ❤️
-</button>
 
 </div>
 
-</div>
 
 </div>
+
+
 
 <div id="controls">
 
-<button
-class="control"
-id="leftButton"
->
-←
-</button>
+<button id="left">←</button>
 
-<button
-class="control"
-id="jumpButton"
->
-↑
-</button>
+<button id="jump">↑</button>
 
-<button
-class="control"
-id="rightButton"
->
-→
-</button>
+<button id="right">→</button>
 
 </div>
+
 
 <script>
-
-const game =
-document.getElementById("game");
-
-const player =
-document.getElementById("player");
-
-const scoreText =
-document.getElementById("score");
-
-const livesText =
-document.getElementById("lives");
-
-const message =
-document.getElementById("message");
-
-const endScreen =
-document.getElementById("endScreen");
-
-const winContent =
-document.getElementById("winContent");
-
-const loseContent =
-document.getElementById("loseContent");
-
-
-let x = 35;
-
-let y = 45;
-
-let vx = 0;
-
-let vy = 0;
-
-let left = false;
-
-let right = false;
-
-let jump = false;
-
-let onGround = false;
-
-let score = 0;
-
-let lives = 3;
-
-let gameRunning = true;
-
-
-const playerSize = 48;
-
-const gravity = 0.65;
-
-const speed = 5;
-
-const jumpPower = 13;
-
-
-/* 30 Stefan collectibles */
-
-const positions = [
-
-[12,11],
-
-[23,11],
-
-[39,23],
-
-[47,23],
-
-[67,17],
-
-[79,17],
-
-[76,38],
-
-[86,38],
-
-[44,45],
-
-[54,45],
-
-[15,56],
-
-[26,56],
-
-[42,68],
-
-[51,68],
-
-[72,77],
-
-[84,77],
-
-[34,87],
-
-[46,87],
-
-[7,77],
-
-[18,77],
-
-[19,11],
-
-[45,23],
-
-[74,17],
-
-[83,17],
-
-[81,38],
-
-[49,45],
-
-[21,56],
-
-[48,68],
-
-[78,77],
-
-[40,87]
-
-];
-
-
-positions.forEach(
-(position, index) => {
-
-const item =
-document.createElement("div");
-
-item.className =
-"collectible";
-
-item.dataset.id =
-index;
-
-item.style.left =
-position[0] + "%";
-
-item.style.bottom =
-position[1] + "%";
-
-
-item.innerHTML = `
-
-<div class="stef-pic">
-</div>
-
-<div class="heart">
-❤️
-</div>
-
-`;
-
-
-game.appendChild(item);
-
-}
-);
-
-
-function showMessage() {
-
-message.classList.remove(
-"show-message"
-);
-
-void message.offsetWidth;
-
-message.classList.add(
-"show-message"
-);
-
-}
-
-
-function updateLives() {
-
-livesText.textContent =
-"❤️".repeat(lives) +
-"🖤".repeat(3-lives);
-
-}
-
-
-function respawn() {
-
-x = 35;
-
-y = 45;
-
-vx = 0;
-
-vy = 0;
-
-}
-
-
-function loseLife() {
-
-lives--;
-
-updateLives();
-
-if(lives <= 0) {
-
-gameRunning = false;
-
-endScreen.style.display =
-"flex";
-
-winContent.style.display =
-"none";
-
-loseContent.style.display =
-"block";
-
-}
-
-else {
-
-respawn();
-
-}
-
-}
-
-
-function update() {
-
-if(gameRunning) {
-
-
-if(left) {
-
-vx = -speed;
-
-}
-
-else if(right) {
-
-vx = speed;
-
-}
-
-else {
-
-vx *= 0.75;
-
-}
-
-
-if(jump && onGround) {
-
-vy = jumpPower;
-
-onGround = false;
-
-}
-
-
-jump = false;
-
-
-vy -= gravity;
-
-
-x += vx;
-
-y += vy;
-
-
-const width =
-game.clientWidth;
-
-const height =
-game.clientHeight;
-
-
-if(x < 0) {
-
-x = 0;
-
-}
-
-
-if(
-x > width-playerSize
-) {
-
-x =
-width-playerSize;
-
-}
-
-
-onGround = false;
-
-
-const playerLeft = x;
-
-const playerRight =
-x + playerSize;
-
-
-document
-.querySelectorAll(
-".platform"
-)
-.forEach(platform => {
-
-
-const px =
-platform.offsetLeft;
-
-const py =
-height -
-platform.offsetTop;
-
-const pw =
-platform.offsetWidth;
-
-const ph =
-platform.offsetHeight;
-
-
-if(
-
-playerRight > px &&
-
-playerLeft < px+pw &&
-
-y <= py+ph &&
-
-y >= py-20 &&
-
-vy <= 0
-
-) {
-
-y = py+ph;
-
-vy = 0;
-
-onGround = true;
-
-}
-
-});
-
-
-/* Fall */
-
-if(y < -70) {
-
-loseLife();
-
-}
-
-
-/* Collect */
-
-document
-.querySelectorAll(
-".collectible"
-)
-.forEach(item => {
-
-
-const ix =
-item.offsetLeft;
-
-const iy =
-height -
-item.offsetTop -
-40;
-
-
-if(
-
-x+playerSize > ix &&
-
-x < ix+48 &&
-
-y+playerSize > iy &&
-
-y < iy+40
-
-) {
-
-item.remove();
-
-score++;
-
-scoreText.textContent =
-score;
-
-showMessage();
-
-
-if(score >= 30) {
-
-gameRunning = false;
-
-endScreen.style.display =
-"flex";
-
-winContent.style.display =
-"block";
-
-loseContent.style.display =
-"none";
-
-}
-
-}
-
-});
-
-
-player.style.left =
-x+"px";
-
-player.style.bottom =
-y+"px";
-
-}
-
-
-requestAnimationFrame(
-update
-);
-
-}
-
-
-document.addEventListener(
-"keydown",
-event => {
-
-
-const key =
-event.key.toLowerCase();
-
-
-if(
-key==="arrowleft" ||
-key==="a"
-) {
-
-left=true;
-
-}
-
-
-if(
-key==="arrowright" ||
-key==="d"
-) {
-
-right=true;
-
-}
-
-
-if(
-key==="arrowup" ||
-key==="w" ||
-key===" "
-) {
-
-jump=true;
-
-}
-
-}
-);
-
-
-document.addEventListener(
-"keyup",
-event => {
-
-
-const key =
-event.key.toLowerCase();
-
-
-if(
-key==="arrowleft" ||
-key==="a"
-) {
-
-left=false;
-
-}
-
-
-if(
-key==="arrowright" ||
-key==="d"
-) {
-
-right=false;
-
-}
-
-}
-);
-
-
-function hold(
-button,
-start,
-stop
-) {
-
-button.addEventListener(
-"pointerdown",
-event => {
-
-event.preventDefault();
-
-start();
-
-}
-);
-
-
-[
-"pointerup",
-"pointercancel",
-"pointerleave"
-]
-.forEach(type => {
-
-button.addEventListener(
-type,
-stop
-);
-
-});
-
-}
-
-
-hold(
-
-document.getElementById(
-"leftButton"
-),
-
-()=>left=true,
-
-()=>left=false
-
-);
-
-
-hold(
-
-document.getElementById(
-"rightButton"
-),
-
-()=>right=true,
-
-()=>right=false
-
-);
-
-
-document
-.getElementById(
-"jumpButton"
-)
-.addEventListener(
-"pointerdown",
-event => {
-
-event.preventDefault();
-
-jump=true;
-
-}
-);
-
-
-document
-.getElementById(
-"restartButton"
-)
-.addEventListener(
-"click",
-()=>location.reload()
-);
-
-
-update();
-
-</script>
-
-</body>
-</html>
