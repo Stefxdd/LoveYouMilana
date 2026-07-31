@@ -16,237 +16,503 @@ box-sizing:border-box;
 }
 
 body{
+
 margin:0;
 overflow:hidden;
+
 background:
 radial-gradient(circle at top,#76278f,#09050d 70%);
+
 color:white;
 font-family:Arial,sans-serif;
 text-align:center;
+
 }
+
 
 h1{
+
 margin:8px;
+
 color:#ff91c8;
+
 text-shadow:0 0 15px #ff3e96;
+
 }
+
+
 
 #hud{
+
 display:flex;
+
 justify-content:center;
+
 gap:30px;
+
 font-size:20px;
+
 }
+
+
+
 
 #game{
+
 position:relative;
+
 width:min(95vw,600px);
+
 height:75vh;
+
 margin:auto;
+
 overflow:hidden;
+
 border:3px solid #ff75c8;
+
 border-radius:20px;
+
+
 background:
+
 linear-gradient(#29103d,#07050b);
+
+
 box-shadow:0 0 30px #ff3e96;
+
 }
+
+
+
+
 
 #world{
+
 position:absolute;
+
 width:100%;
+
 height:10000px;
+
 bottom:0;
+
 }
+
+
+
+
 
 #player{
+
 position:absolute;
+
 width:55px;
+
 height:55px;
+
 border-radius:50%;
+
+
 background-image:url("IMG_9350.jpg");
+
 background-size:cover;
+
 background-position:center;
+
+
 border:3px solid white;
+
+
 box-shadow:
+
 0 0 15px #ff4e9d,
 0 0 30px #ff4e9d;
+
+
 z-index:20;
+
 }
+
+
+
 
 .falling{
+
 animation:fallAway 1s forwards;
+
 }
 
+
+
+
 @keyframes fallAway{
+
+
 0%{
+
 transform:rotate(0deg) scale(1);
+
 opacity:1;
+
 }
+
+
 100%{
+
 transform:
+
 rotate(720deg)
 translateY(180px)
 scale(.3);
+
 opacity:0;
-}
+
 }
 
+
+}
+
+
+
+
 .platform{
+
 position:absolute;
+
 height:18px;
+
 border-radius:15px;
+
+
 background:
+
 linear-gradient(
 90deg,
 #7628a5,
 #ff73d1
 );
+
+
 box-shadow:
+
 0 0 15px #ff4ccf;
+
 }
+
+
+
+
 
 .collectible{
+
 position:absolute;
+
 width:70px;
+
 height:50px;
+
+
 animation:float 1s infinite alternate;
+
+
 z-index:10;
+
 }
+
+
+
+
 
 .stef{
+
 width:42px;
+
 height:42px;
+
 border-radius:50%;
+
+
 background-image:url("stef.jpg");
+
+
 background-size:120%;
+
+
 background-position:center 65%;
+
+
 background-repeat:no-repeat;
+
+
 border:2px solid white;
+
+
 box-shadow:
+
 0 0 12px #ff4e9d;
+
 }
+
+
+
+
 
 .collectible span{
+
 position:absolute;
+
 right:0;
+
 top:-5px;
+
+
 font-size:28px;
+
+
 filter:drop-shadow(0 0 7px pink);
+
 }
+
+
+
+
 
 @keyframes float{
+
+
 from{
+
 transform:translateY(0);
+
 }
+
+
 to{
+
 transform:translateY(-8px);
+
 }
+
+
 }
+
+
+
 
 #controls{
+
 margin-top:10px;
+
 }
+
+
+
+
 
 button{
+
 width:90px;
+
 height:55px;
+
 margin:5px;
+
+
 border:0;
+
 border-radius:15px;
+
+
 background:#dc3988;
+
+
 color:white;
+
+
 font-size:25px;
+
 }
+
+
+
 
 #endScreen{
+
 display:none;
+
+
 position:absolute;
+
+
 inset:0;
+
+
 z-index:100;
+
+
 background:rgba(0,0,0,.85);
+
+
 justify-content:center;
+
+
 align-items:center;
+
+
 flex-direction:column;
+
+
 }
+
+
+
 
 #endScreen h2{
+
 color:#ff91c8;
+
 font-size:40px;
+
 }
 
+
+
+
 #endScreen a{
+
 background:#e63d8f;
+
+
 padding:15px 30px;
+
+
 border-radius:30px;
+
+
 color:white;
+
+
 text-decoration:none;
+
+
 }
+
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <h1>Catch My Hearts ❤️</h1>
 
+
+
 <div id="hud">
 
+
 <div>
+
 ❤️ <span id="score">0</span>/30
+
 </div>
+
 
 <div>
+
 Lives:
+
 <span id="lives">
+
 ❤️❤️❤️
+
 </span>
-</div>
+
 
 </div>
+
+
+</div>
+
+
+
 
 
 <div id="game">
 
+
 <div id="world">
+
 
 <div id="player"></div>
 
+
 </div>
+
+
+
 
 
 <div id="endScreen">
 
+
 <h2 id="endTitle">
+
 Bravo Milana ❤️
+
 </h2>
 
+
 <p id="endText">
+
 You found all my hearts 🥹
+
 </p>
 
+
+
 <a id="endButton" href="#">
+
 Continue ❤️
+
 </a>
 
-</div>
 
 </div>
+
+
+</div>
+
+
+
 
 
 <div id="controls">
 
+
 <button id="left">
+
 ←
+
 </button>
+
 
 <button id="jump">
+
 ↑
+
 </button>
 
+
 <button id="right">
+
 →
+
 </button>
+
 
 </div>
 <script>
@@ -288,11 +554,14 @@ const gravity=-0.55;
 const jumpPower=14;
 
 
+
 let lastSafeX=x;
 let lastSafeY=40;
 
 
+
 let platforms=[];
+
 
 
 for(let i=0;i<80;i++){
@@ -301,21 +570,30 @@ let platform=document.createElement("div");
 
 platform.className="platform";
 
+
 platform.style.width =
 (100+Math.random()*90)+"px";
 
+
 platform.style.left =
 (15+Math.random()*60)+"%";
+
 
 platform.style.bottom =
 (i*110)+"px";
 
 
+
 world.appendChild(platform);
+
 
 platforms.push(platform);
 
+
 }
+
+
+
 
 
 
@@ -329,6 +607,10 @@ livesText.innerHTML =
 
 
 
+
+
+
+
 function respawn(){
 
 player.classList.remove("falling");
@@ -337,15 +619,22 @@ x=lastSafeX;
 
 y=lastSafeY+25;
 
+
 vx=0;
+
 vy=0;
+
 
 camera=Math.max(0,lastSafeY-300);
 
+
 world.style.bottom=-camera+"px";
 
+
 player.style.opacity="1";
+
 player.style.transform="none";
+
 
 falling=false;
 
@@ -355,38 +644,53 @@ falling=false;
 
 
 
+
+
 function loseLife(){
 
+
 if(gameFinished || falling)
+
 return;
+
 
 
 lives--;
 
+
 updateLives();
 
 
+
 falling=true;
+
 
 player.classList.add("falling");
 
 
 
+
+
 if(lives<=0){
+
 
 gameFinished=true;
 
 
+
 setTimeout(()=>{
+
 
 endScreen.style.display="flex";
 
+
 endTitle.innerHTML="Game Over 😭";
+
 
 endText.innerHTML="You almost got them ❤️";
 
 
-// FIXED DEATH BUTTON ONLY
+// ONLY RESTART BUTTON
 
 endButton.innerHTML="Try Again 🔄";
 
@@ -405,9 +709,12 @@ location.reload();
 },1000);
 
 
+
 return;
 
+
 }
+
 
 
 
@@ -415,12 +722,18 @@ return;
 
 setTimeout(()=>{
 
+
 respawn();
+
 
 },1000);
 
 
+
 }
+
+
+
 
 
 
@@ -428,11 +741,15 @@ respawn();
 
 function win(){
 
+
 if(gameFinished)
+
 return;
 
 
+
 gameFinished=true;
+
 
 
 endScreen.style.display="flex";
@@ -440,20 +757,38 @@ endScreen.style.display="flex";
 
 endTitle.innerHTML="Bravo Milana ❤️";
 
+
 endText.innerHTML="You found all my hearts 🥹";
+
 
 
 endButton.innerHTML="Continue ❤️";
 
 
-endButton.href=
-"https://stefxdd.github.io/MilanaEstiBravo/LoveYouMilana.html";
+endButton.href="https://stefxdd.github.io/MilanaEstiBravo/";
+
+
+endButton.onclick=function(){
+
+window.location.href=
+"https://stefxdd.github.io/MilanaEstiBravo/";
+
+};
+
+
 
 }
 
 
 
+
+
+
+
+
+
 function update(){
+
 
 
 if(gameFinished){
@@ -466,7 +801,11 @@ return;
 
 
 
+
+
 grounded=false;
+
+
 
 
 
@@ -474,9 +813,11 @@ if(left)
 
 vx=-5;
 
+
 else if(right)
 
 vx=5;
+
 
 else
 
@@ -484,11 +825,18 @@ vx*=0.8;
 
 
 
+
+
 vy+=gravity;
+
 
 x+=vx;
 
+
 y+=vy;
+
+
+
 
 
 
@@ -497,9 +845,14 @@ if(x<0)
 x=0;
 
 
+
 if(x>game.clientWidth-55)
 
 x=game.clientWidth-55;
+
+
+
+
 
 
 
@@ -508,7 +861,11 @@ platforms.forEach(platform=>{
 
 let px=platform.offsetLeft;
 
+
 let py=parseInt(platform.style.bottom);
+
+
+
 
 
 
@@ -518,9 +875,11 @@ x+55>px &&
 
 x<px+platform.offsetWidth &&
 
+
 y<=py+18 &&
 
 y>=py-15 &&
+
 
 vy<0
 
@@ -529,7 +888,9 @@ vy<0
 
 y=py+18;
 
+
 vy=jumpPower;
+
 
 grounded=true;
 
@@ -537,53 +898,81 @@ grounded=true;
 
 if(y>lastSafeY){
 
+
 lastSafeX=x;
+
 
 lastSafeY=y;
 
-}
 
 }
+
+
+}
+
 
 
 });
 
 
 
+
+
+
+
 if(y-camera>300){
+
 
 camera=y-300;
 
+
 world.style.bottom=-camera+"px";
 
+
 }
+
+
+
+
 
 
 
 if(y<camera-250 && !falling){
 
+
 loseLife();
 
+
 }
+
+
+
 
 
 
 player.style.left=x+"px";
 
+
 player.style.bottom=y+"px";
+
 
 
 requestAnimationFrame(update);
 
 
+
 }
-    
-// HEARTS
+    // HEARTS
 
 let hearts=[];
 
 
-for(let i=1;i<=50;i++){
+platforms.forEach((platform,index)=>{
+
+
+// create enough hearts but keep spacing
+
+if(index % 2 === 0 && hearts.length < 50){
 
 
 let heart=document.createElement("div");
@@ -593,13 +982,20 @@ heart.className="collectible";
 
 
 
-heart.style.left=
-(10+Math.random()*70)+"%";
+let px = platform.offsetLeft;
+
+let py = parseInt(platform.style.bottom);
 
 
 
-heart.style.bottom=
-(i*170+100)+"px";
+// place heart above platform
+
+heart.style.left =
+(px + platform.offsetWidth/2 - 25) + "px";
+
+
+heart.style.bottom =
+(py + 35) + "px";
 
 
 
@@ -620,7 +1016,13 @@ world.appendChild(heart);
 hearts.push(heart);
 
 
+
 }
+
+
+});
+
+
 
 
 
@@ -644,6 +1046,7 @@ let ix=heart.offsetLeft;
 
 
 let iy=parseInt(heart.style.bottom);
+
 
 
 
@@ -779,6 +1182,8 @@ grounded=false;
 
 
 
+
+
 document.addEventListener("keyup",e=>{
 
 
@@ -837,6 +1242,7 @@ button.addEventListener("pointerleave",release);
 
 
 
+
 hold(
 
 document.getElementById("left"),
@@ -853,6 +1259,8 @@ document.getElementById("left"),
 
 
 
+
+
 hold(
 
 document.getElementById("right"),
@@ -862,6 +1270,8 @@ document.getElementById("right"),
 ()=>right=false
 
 );
+
+
 
 
 
@@ -886,6 +1296,8 @@ grounded=false;
 
 
 });
+
+
 
 
 
