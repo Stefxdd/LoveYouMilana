@@ -15,9 +15,7 @@
     -webkit-tap-highlight-color:transparent;
 }
 
-
 body{
-
     margin:0;
     overflow:hidden;
 
@@ -27,35 +25,26 @@ body{
     color:white;
     font-family:Arial,sans-serif;
     text-align:center;
-
 }
 
 
 h1{
-
     margin:8px;
-
     color:#ff91c8;
 
     text-shadow:
     0 0 15px #ff3e96;
-
 }
-
 
 
 #hud{
 
     display:flex;
-
     justify-content:center;
-
     gap:30px;
-
     font-size:20px;
 
 }
-
 
 
 #game{
@@ -74,20 +63,13 @@ h1{
 
     border-radius:20px;
 
-
     background:
-
-    linear-gradient(
-    #29103d,
-    #07050b
-    );
-
+    linear-gradient(#29103d,#07050b);
 
     box-shadow:
     0 0 30px #ff3e96;
 
 }
-
 
 
 #world{
@@ -96,12 +78,11 @@ h1{
 
     width:100%;
 
-    height:7000px;
+    height:8000px;
 
     bottom:0;
 
 }
-
 
 
 #player{
@@ -150,26 +131,27 @@ h1{
 
 0%{
 
-    transform:rotate(0deg) scale(1);
+transform:rotate(0deg) scale(1);
 
-    opacity:1;
+opacity:1;
 
 }
 
 
 100%{
 
-    transform:
-    rotate(720deg)
-    translateY(180px)
-    scale(.3);
+transform:
+rotate(720deg)
+translateY(180px)
+scale(.3);
 
-    opacity:0;
+opacity:0;
+
+}
+
 
 }
 
-
-}
 
 
 
@@ -203,17 +185,14 @@ h1{
 
 .collectible{
 
-
     position:absolute;
 
     width:70px;
 
     height:50px;
 
-
     animation:
     float 1s infinite alternate;
-
 
     z-index:10;
 
@@ -224,11 +203,9 @@ h1{
 
 .stef{
 
-
     width:42px;
 
     height:42px;
-
 
     border-radius:50%;
 
@@ -243,22 +220,19 @@ h1{
     background-repeat:no-repeat;
 
 
-    border:
-
-    2px solid white;
+    border:2px solid white;
 
 
     box-shadow:
 
     0 0 12px #ff4e9d;
 
-
 }
 
 
 
-.collectible span{
 
+.collectible span{
 
     position:absolute;
 
@@ -266,16 +240,11 @@ h1{
 
     top:-5px;
 
-
     font-size:28px;
 
 
     filter:
-
-    drop-shadow(
-    0 0 7px pink
-    );
-
+    drop-shadow(0 0 7px pink);
 
 }
 
@@ -284,13 +253,11 @@ h1{
 
 @keyframes float{
 
-
 from{
 
 transform:translateY(0);
 
 }
-
 
 to{
 
@@ -298,14 +265,13 @@ transform:translateY(-8px);
 
 }
 
-
 }
 
 
 
 
-#controls{
 
+#controls{
 
     margin-top:10px;
 
@@ -315,25 +281,19 @@ transform:translateY(-8px);
 
 button{
 
-
     width:90px;
 
     height:55px;
 
     margin:5px;
 
-
     border:0;
-
 
     border-radius:15px;
 
-
     background:#dc3988;
 
-
     color:white;
-
 
     font-size:25px;
 
@@ -345,15 +305,11 @@ button{
 
 #endScreen{
 
-
     display:none;
-
 
     position:absolute;
 
-
     inset:0;
-
 
     z-index:100;
 
@@ -369,40 +325,32 @@ button{
 
     flex-direction:column;
 
-
 }
 
 
 
 #endScreen h2{
 
-
     color:#ff91c8;
 
     font-size:40px;
-
 
 }
 
 
 
-#endScreen a{
 
+#endScreen a{
 
     background:#e63d8f;
 
-
     padding:15px 30px;
-
 
     border-radius:30px;
 
-
     color:white;
 
-
     text-decoration:none;
-
 
 }
 
@@ -420,8 +368,11 @@ button{
 
 <div id="hud">
 
+
 <div>
+
 ❤️ <span id="score">0</span>/30
+
 </div>
 
 
@@ -430,10 +381,14 @@ button{
 Lives:
 
 <span id="lives">
+
 ❤️❤️❤️
+
 </span>
 
+
 </div>
+
 
 </div>
 
@@ -450,21 +405,29 @@ Lives:
 </div>
 
 
+
 <div id="endScreen">
 
 
 <h2 id="endTitle">
+
 Bravo Milana ❤️
+
 </h2>
 
 
 <p id="endText">
+
 You found all my hearts 🥹
+
 </p>
 
 
+
 <a href="https://stefxdd.github.io/MilanaEstiBravo">
+
 Continue ❤️
+
 </a>
 
 
@@ -478,17 +441,23 @@ Continue ❤️
 
 
 <button id="left">
+
 ←
+
 </button>
 
 
 <button id="jump">
+
 ↑
+
 </button>
 
 
 <button id="right">
+
 →
+
 </button>
 
 
@@ -530,11 +499,10 @@ const gravity = -0.55;
 const jumpPower = 14;
 
 
-
 // CHECKPOINT
 
 let lastSafeX = x;
-let lastSafeY = y;
+let lastSafeY = 40;
 
 
 
@@ -543,17 +511,17 @@ let lastSafeY = y;
 let platforms = [];
 
 
-for(let i = 0; i < 60; i++){
+for(let i=0;i<70;i++){
+
 
     let platform = document.createElement("div");
+
 
     platform.className="platform";
 
 
-    let width = 100 + Math.random()*80;
-
-
-    platform.style.width = width+"px";
+    platform.style.width =
+    (100 + Math.random()*80)+"px";
 
 
     platform.style.left =
@@ -569,13 +537,11 @@ for(let i = 0; i < 60; i++){
 
     platforms.push(platform);
 
+
 }
 
 
 
-// initial platform
-
-lastSafeY = 40;
 
 
 
@@ -590,14 +556,18 @@ function updateLives(){
 
 
 
+
 function respawn(){
+
 
     player.classList.remove("falling");
 
 
     x = lastSafeX;
 
+
     y = lastSafeY + 25;
+
 
 
     vx = 0;
@@ -605,11 +575,15 @@ function respawn(){
     vy = 0;
 
 
-    camera = Math.max(0,lastSafeY-300);
+
+    camera =
+    Math.max(0,lastSafeY-300);
+
 
 
     world.style.bottom =
     -camera+"px";
+
 
 
     player.style.opacity="1";
@@ -619,6 +593,7 @@ function respawn(){
 
 
     falling=false;
+
 
 }
 
@@ -640,6 +615,7 @@ function loseLife(){
     updateLives();
 
 
+
     falling=true;
 
 
@@ -653,26 +629,30 @@ function loseLife(){
         gameFinished=true;
 
 
+
         setTimeout(()=>{
 
 
             endScreen.style.display="flex";
 
 
-            endTitle.innerHTML =
+            endTitle.innerHTML=
             "Game Over 😭";
 
 
-            endText.innerHTML =
+            endText.innerHTML=
             "Try again ❤️";
 
 
         },1000);
 
 
+
         return;
 
+
     }
+
 
 
 
@@ -685,7 +665,11 @@ function loseLife(){
     },1000);
 
 
+
 }
+
+
+
 
 
 
@@ -694,21 +678,28 @@ function loseLife(){
 function win(){
 
 
+    if(gameFinished)
+
+    return;
+
+
     gameFinished=true;
 
 
     endScreen.style.display="flex";
 
 
-    endTitle.innerHTML =
+    endTitle.innerHTML=
     "Bravo Milana ❤️";
 
 
-    endText.innerHTML =
+    endText.innerHTML=
     "You found all my hearts 🥹";
 
 
 }
+
+
 
 
 
@@ -729,6 +720,7 @@ function update(){
 
 
 
+
     if(left)
 
         vx=-5;
@@ -746,7 +738,10 @@ function update(){
 
 
 
+
+
     vy += gravity;
+
 
 
     x += vx;
@@ -756,9 +751,11 @@ function update(){
 
 
 
+
     if(x<0)
 
         x=0;
+
 
 
     if(x>game.clientWidth-55)
@@ -770,8 +767,6 @@ function update(){
 
 
 
-    // COLLISION
-
 
     platforms.forEach(platform=>{
 
@@ -780,6 +775,7 @@ function update(){
 
 
         let py = parseInt(platform.style.bottom);
+
 
 
 
@@ -799,20 +795,21 @@ function update(){
         ){
 
 
-            y = py+18;
+            y=py+18;
 
 
-            vy = jumpPower;
+            vy=jumpPower;
 
 
 
-            // SAVE ONLY HIGHER CHECKPOINTS
 
-            if(y > lastSafeY){
+            if(y>lastSafeY){
+
 
                 lastSafeX=x;
 
                 lastSafeY=y;
+
 
             }
 
@@ -827,7 +824,7 @@ function update(){
 
 
 
-    // CAMERA FOLLOW
+
 
 
     if(y-camera > 300){
@@ -847,12 +844,12 @@ function update(){
 
 
 
-    // DEATH
 
+    if(y < camera-250 && !falling && vy<0){
 
-    if(y < camera-250 && !falling && vy < 0){
 
         loseLife();
+
 
     }
 
@@ -862,13 +859,17 @@ function update(){
 
 
 
-    player.style.left=x+"px";
+    player.style.left =
+    x+"px";
 
-    player.style.bottom=y+"px";
+
+    player.style.bottom =
+    y+"px";
 
 
 
     requestAnimationFrame(update);
+
 
 
 }
@@ -877,7 +878,7 @@ function update(){
 let hearts = [];
 
 
-for(let i=1;i<=30;i++){
+for(let i=1;i<=50;i++){
 
 
     let heart = document.createElement("div");
@@ -891,7 +892,7 @@ for(let i=1;i<=30;i++){
 
 
     heart.style.bottom =
-    (i*200+120)+"px";
+    (i*150+120)+"px";
 
 
 
@@ -933,6 +934,7 @@ function collectHearts(){
 
         let ix = heart.offsetLeft;
 
+
         let iy = parseInt(heart.style.bottom);
 
 
@@ -965,6 +967,8 @@ function collectHearts(){
 
 
 
+            // NEED 30 OUT OF 50
+
             if(score>=30){
 
                 win();
@@ -987,17 +991,16 @@ function collectHearts(){
 
 
 
+// add heart checking into update
 
-// add collection into game loop
-
-const oldUpdate = update;
+const gameLoop = update;
 
 
 update = function(){
 
     collectHearts();
 
-    oldUpdate();
+    gameLoop();
 
 };
 
@@ -1009,7 +1012,7 @@ update = function(){
 
 
 
-// KEYBOARD
+// KEYBOARD CONTROLS
 
 
 document.addEventListener("keydown",e=>{
@@ -1039,6 +1042,7 @@ document.addEventListener("keydown",e=>{
 
 
 
+
 document.addEventListener("keyup",e=>{
 
 
@@ -1063,29 +1067,29 @@ document.addEventListener("keyup",e=>{
 
 
 
-
 // MOBILE BUTTONS
 
 
 function hold(button,press,release){
 
 
-button.addEventListener("pointerdown",e=>{
+    button.addEventListener("pointerdown",e=>{
 
 
-    e.preventDefault();
-
-    press();
+        e.preventDefault();
 
 
-});
+        press();
+
+
+    });
 
 
 
-button.addEventListener("pointerup",release);
+    button.addEventListener("pointerup",release);
 
 
-button.addEventListener("pointerleave",release);
+    button.addEventListener("pointerleave",release);
 
 
 }
@@ -1133,8 +1137,6 @@ document.getElementById("jump")
 
 
 });
-
-
 
 
 
