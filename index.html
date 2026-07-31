@@ -11,116 +11,129 @@
 <style>
 
 *{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
+
 
 body{
-    margin:0;
-    overflow:hidden;
 
-    background:
-    radial-gradient(circle at top,#76278f,#09050d 70%);
+margin:0;
+overflow:hidden;
 
-    color:white;
-    font-family:Arial,sans-serif;
-    text-align:center;
+background:
+radial-gradient(circle at top,#76278f,#09050d 70%);
+
+color:white;
+font-family:Arial,sans-serif;
+text-align:center;
+
 }
+
 
 
 h1{
-    margin:8px;
-    color:#ff91c8;
 
-    text-shadow:
-    0 0 15px #ff3e96;
+margin:8px;
+
+color:#ff91c8;
+
+text-shadow:0 0 15px #ff3e96;
+
 }
+
 
 
 #hud{
 
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    font-size:20px;
+display:flex;
+justify-content:center;
+gap:30px;
+font-size:20px;
 
 }
+
+
 
 
 #game{
 
-    position:relative;
+position:relative;
 
-    width:min(95vw,600px);
+width:min(95vw,600px);
 
-    height:75vh;
+height:75vh;
 
-    margin:auto;
+margin:auto;
 
-    overflow:hidden;
+overflow:hidden;
 
-    border:3px solid #ff75c8;
+border:3px solid #ff75c8;
 
-    border-radius:20px;
+border-radius:20px;
 
-    background:
-    linear-gradient(#29103d,#07050b);
 
-    box-shadow:
-    0 0 30px #ff3e96;
+background:
+linear-gradient(#29103d,#07050b);
+
+
+box-shadow:0 0 30px #ff3e96;
 
 }
+
 
 
 #world{
 
-    position:absolute;
+position:absolute;
 
-    width:100%;
+width:100%;
 
-    height:8000px;
+height:10000px;
 
-    bottom:0;
+bottom:0;
 
 }
+
 
 
 #player{
 
-    position:absolute;
+position:absolute;
 
-    width:55px;
+width:55px;
 
-    height:55px;
+height:55px;
 
-    border-radius:50%;
-
-
-    background-image:url("IMG_9350.jpg");
-
-    background-size:cover;
-
-    background-position:center;
+border-radius:50%;
 
 
-    border:3px solid white;
+background-image:url("IMG_9350.jpg");
+
+background-size:cover;
+
+background-position:center;
 
 
-    box-shadow:
-
-    0 0 15px #ff4e9d,
-    0 0 30px #ff4e9d;
+border:3px solid white;
 
 
-    z-index:20;
+box-shadow:
+
+0 0 15px #ff4e9d,
+0 0 30px #ff4e9d;
+
+
+z-index:20;
 
 }
+
 
 
 
 .falling{
 
-    animation:fallAway 1s forwards;
+animation:fallAway 1s forwards;
 
 }
 
@@ -141,9 +154,11 @@ opacity:1;
 100%{
 
 transform:
+
 rotate(720deg)
 translateY(180px)
 scale(.3);
+
 
 opacity:0;
 
@@ -158,74 +173,77 @@ opacity:0;
 
 .platform{
 
-    position:absolute;
+position:absolute;
 
-    height:18px;
+height:18px;
 
-    border-radius:15px;
-
-
-    background:
-
-    linear-gradient(
-    90deg,
-    #7628a5,
-    #ff73d1
-    );
+border-radius:15px;
 
 
-    box-shadow:
+background:
 
-    0 0 15px #ff4ccf;
+linear-gradient(
+90deg,
+#7628a5,
+#ff73d1
+);
+
+
+box-shadow:
+
+0 0 15px #ff4ccf;
 
 }
+
 
 
 
 
 .collectible{
 
-    position:absolute;
+position:absolute;
 
-    width:70px;
+width:70px;
 
-    height:50px;
+height:50px;
 
-    animation:
-    float 1s infinite alternate;
 
-    z-index:10;
+animation:float 1s infinite alternate;
+
+
+z-index:10;
 
 }
 
 
 
 
+
 .stef{
 
-    width:42px;
+width:42px;
 
-    height:42px;
+height:42px;
 
-    border-radius:50%;
-
-
-    background-image:url("stef.jpg");
+border-radius:50%;
 
 
-    background-size:120%;
+background-image:url("stef.jpg");
 
-    background-position:center 65%;
+background-size:120%;
 
-    background-repeat:no-repeat;
-
-
-    border:2px solid white;
+background-position:center 65%;
 
 
-    box-shadow:
+background-repeat:no-repeat;
 
-    0 0 12px #ff4e9d;
+
+border:2px solid white;
+
+
+box-shadow:
+
+0 0 12px #ff4e9d;
 
 }
 
@@ -234,24 +252,26 @@ opacity:0;
 
 .collectible span{
 
-    position:absolute;
+position:absolute;
 
-    right:0;
+right:0;
 
-    top:-5px;
-
-    font-size:28px;
+top:-5px;
 
 
-    filter:
-    drop-shadow(0 0 7px pink);
+font-size:28px;
+
+
+filter:drop-shadow(0 0 7px pink);
 
 }
 
 
 
 
+
 @keyframes float{
+
 
 from{
 
@@ -259,11 +279,13 @@ transform:translateY(0);
 
 }
 
+
 to{
 
 transform:translateY(-8px);
 
 }
+
 
 }
 
@@ -273,7 +295,7 @@ transform:translateY(-8px);
 
 #controls{
 
-    margin-top:10px;
+margin-top:10px;
 
 }
 
@@ -281,49 +303,56 @@ transform:translateY(-8px);
 
 button{
 
-    width:90px;
+width:90px;
 
-    height:55px;
+height:55px;
 
-    margin:5px;
+margin:5px;
 
-    border:0;
 
-    border-radius:15px;
+border:0;
 
-    background:#dc3988;
+border-radius:15px;
 
-    color:white;
 
-    font-size:25px;
+background:#dc3988;
+
+
+color:white;
+
+
+font-size:25px;
 
 }
 
 
 
 
-
 #endScreen{
 
-    display:none;
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:100;
+display:none;
 
 
-    background:
-
-    rgba(0,0,0,.85);
+position:absolute;
 
 
-    justify-content:center;
+inset:0;
 
-    align-items:center;
 
-    flex-direction:column;
+z-index:100;
+
+
+background:rgba(0,0,0,.85);
+
+
+justify-content:center;
+
+
+align-items:center;
+
+
+flex-direction:column;
+
 
 }
 
@@ -331,26 +360,25 @@ button{
 
 #endScreen h2{
 
-    color:#ff91c8;
+color:#ff91c8;
 
-    font-size:40px;
+font-size:40px;
 
 }
 
 
 
-
 #endScreen a{
 
-    background:#e63d8f;
+background:#e63d8f;
 
-    padding:15px 30px;
+padding:15px 30px;
 
-    border-radius:30px;
+border-radius:30px;
 
-    color:white;
+color:white;
 
-    text-decoration:none;
+text-decoration:none;
 
 }
 
@@ -366,8 +394,8 @@ button{
 <h1>Catch My Hearts ❤️</h1>
 
 
-<div id="hud">
 
+<div id="hud">
 
 <div>
 
@@ -386,11 +414,12 @@ Lives:
 
 </span>
 
-
 </div>
 
 
 </div>
+
+
 
 
 <div id="game">
@@ -423,8 +452,7 @@ You found all my hearts 🥹
 </p>
 
 
-
-<a href="https://stefxdd.github.io/MilanaEstiBravo">
+<a href="https://stefxdd.github.io/MilanaEstiBravo/game.html">
 
 Continue ❤️
 
@@ -435,6 +463,8 @@ Continue ❤️
 
 
 </div>
+
+
 
 
 <div id="controls">
@@ -476,27 +506,36 @@ const endTitle = document.getElementById("endTitle");
 const endText = document.getElementById("endText");
 
 
+
 let x = 270;
-let y = 120;
+let y = 80;
 
 let vx = 0;
 let vy = 0;
 
+
 let camera = 0;
+
 
 let score = 0;
 let lives = 3;
 
+
 let falling = false;
 let gameFinished = false;
+
+
+let grounded = false;
 
 
 let left = false;
 let right = false;
 
 
+
 const gravity = -0.55;
 const jumpPower = 14;
+
 
 
 // CHECKPOINT
@@ -508,34 +547,38 @@ let lastSafeY = 40;
 
 // PLATFORMS
 
-let platforms = [];
+let platforms=[];
 
 
-for(let i=0;i<70;i++){
+
+for(let i=0;i<80;i++){
 
 
-    let platform = document.createElement("div");
+let platform=document.createElement("div");
 
 
-    platform.className="platform";
+platform.className="platform";
 
 
-    platform.style.width =
-    (100 + Math.random()*80)+"px";
+
+platform.style.width =
+(100+Math.random()*90)+"px";
 
 
-    platform.style.left =
-    (20 + Math.random()*55)+"%";
+platform.style.left =
+(15+Math.random()*60)+"%";
 
 
-    platform.style.bottom =
-    (i*110)+"px";
+
+platform.style.bottom =
+(i*110)+"px";
 
 
-    world.appendChild(platform);
+
+world.appendChild(platform);
 
 
-    platforms.push(platform);
+platforms.push(platform);
 
 
 }
@@ -547,11 +590,13 @@ for(let i=0;i<70;i++){
 
 function updateLives(){
 
-    livesText.innerHTML =
-    "❤️".repeat(lives)+
-    "🖤".repeat(3-lives);
+livesText.innerHTML =
+"❤️".repeat(lives)+
+"🖤".repeat(3-lives);
 
 }
+
+
 
 
 
@@ -560,42 +605,43 @@ function updateLives(){
 function respawn(){
 
 
-    player.classList.remove("falling");
+player.classList.remove("falling");
 
 
-    x = lastSafeX;
+x=lastSafeX;
 
 
-    y = lastSafeY + 25;
-
-
-
-    vx = 0;
-
-    vy = 0;
+y=lastSafeY+25;
 
 
 
-    camera =
-    Math.max(0,lastSafeY-300);
+vx=0;
+
+vy=0;
 
 
 
-    world.style.bottom =
-    -camera+"px";
+camera=Math.max(0,lastSafeY-300);
+
+
+world.style.bottom =
+-camera+"px";
 
 
 
-    player.style.opacity="1";
+player.style.opacity="1";
 
 
-    player.style.transform="none";
+player.style.transform="none";
 
 
-    falling=false;
+
+falling=false;
 
 
 }
+
+
 
 
 
@@ -604,69 +650,65 @@ function respawn(){
 function loseLife(){
 
 
-    if(gameFinished || falling)
+if(gameFinished || falling)
 
-    return;
-
-
-
-    lives--;
-
-    updateLives();
+return;
 
 
 
-    falling=true;
+lives--;
+
+updateLives();
 
 
-    player.classList.add("falling");
+falling=true;
 
 
-
-    if(lives<=0){
-
-
-        gameFinished=true;
-
-
-
-        setTimeout(()=>{
-
-
-            endScreen.style.display="flex";
-
-
-            endTitle.innerHTML=
-            "Game Over 😭";
-
-
-            endText.innerHTML=
-            "Try again ❤️";
-
-
-        },1000);
+player.classList.add("falling");
 
 
 
-        return;
+if(lives<=0){
 
 
-    }
+gameFinished=true;
+
+
+setTimeout(()=>{
+
+
+endScreen.style.display="flex";
+
+
+endTitle.innerHTML="Game Over 😭";
+
+
+endText.innerHTML="Try again ❤️";
+
+
+},1000);
+
+
+return;
+
+
+}
 
 
 
 
-    setTimeout(()=>{
+setTimeout(()=>{
 
 
-        respawn();
+respawn();
 
 
-    },1000);
+},1000);
 
 
 
 }
+
 
 
 
@@ -678,27 +720,26 @@ function loseLife(){
 function win(){
 
 
-    if(gameFinished)
+if(gameFinished)
 
-    return;
-
-
-    gameFinished=true;
+return;
 
 
-    endScreen.style.display="flex";
+gameFinished=true;
 
 
-    endTitle.innerHTML=
-    "Bravo Milana ❤️";
+endScreen.style.display="flex";
 
 
-    endText.innerHTML=
-    "You found all my hearts 🥹";
+endTitle.innerHTML=
+"Bravo Milana ❤️";
+
+
+endText.innerHTML=
+"You found all my hearts 🥹";
 
 
 }
-
 
 
 
@@ -710,134 +751,134 @@ function win(){
 function update(){
 
 
-    if(gameFinished){
 
-        requestAnimationFrame(update);
+if(gameFinished){
 
-        return;
+requestAnimationFrame(update);
 
-    }
+return;
 
+}
 
 
 
-    if(left)
 
-        vx=-5;
+// reset grounded every frame
 
+grounded=false;
 
-    else if(right)
 
-        vx=5;
 
 
-    else
 
-        vx*=0.8;
+if(left)
 
+vx=-5;
 
 
+else if(right)
 
+vx=5;
 
 
-    vy += gravity;
+else
 
+vx*=0.8;
 
 
-    x += vx;
 
-    y += vy;
 
 
+vy += gravity;
 
 
+x += vx;
 
-    if(x<0)
+y += vy;
 
-        x=0;
 
 
 
-    if(x>game.clientWidth-55)
 
-        x=game.clientWidth-55;
+if(x<0)
 
+x=0;
 
 
 
+if(x>game.clientWidth-55)
 
+x=game.clientWidth-55;
 
 
-    platforms.forEach(platform=>{
 
 
-        let px = platform.offsetLeft;
 
 
-        let py = parseInt(platform.style.bottom);
 
 
+// PLATFORM COLLISION
 
 
-        if(
+platforms.forEach(platform=>{
 
-        x+55 > px &&
 
-        x < px+platform.offsetWidth &&
+let px=platform.offsetLeft;
 
 
-        y <= py+18 &&
+let py=parseInt(platform.style.bottom);
 
-        y >= py-15 &&
 
-        vy < 0
 
-        ){
 
+if(
 
-            y=py+18;
+x+55 > px &&
 
+x < px+platform.offsetWidth &&
 
-            vy=jumpPower;
 
+y <= py+18 &&
 
+y >= py-15 &&
 
 
-            if(y>lastSafeY){
+vy < 0
 
+){
 
-                lastSafeX=x;
 
-                lastSafeY=y;
+y=py+18;
 
 
-            }
+vy=jumpPower;
 
 
-        }
 
+grounded=true;
 
 
-    });
 
+// save higher checkpoint
 
+if(y>lastSafeY){
 
 
+lastSafeX=x;
 
+lastSafeY=y;
 
 
+}
 
-    if(y-camera > 300){
 
+}
 
-        camera=y-300;
 
 
-        world.style.bottom =
-        -camera+"px";
+});
 
 
-    }
 
 
 
@@ -845,71 +886,94 @@ function update(){
 
 
 
-    if(y < camera-250 && !falling && vy<0){
+// CAMERA
 
 
-        loseLife();
+if(y-camera>300){
 
 
-    }
+camera=y-300;
 
 
+world.style.bottom=-camera+"px";
 
 
+}
 
 
 
-    player.style.left =
-    x+"px";
 
 
-    player.style.bottom =
-    y+"px";
 
 
+// FALL
 
-    requestAnimationFrame(update);
+
+if(y<camera-250 && !falling){
+
+
+loseLife();
+
+
+}
+
+
+
+
+
+
+
+player.style.left=x+"px";
+
+player.style.bottom=y+"px";
+
+
+
+requestAnimationFrame(update);
 
 
 
 }
 // HEARTS
 
-let hearts = [];
+let hearts=[];
 
 
 for(let i=1;i<=50;i++){
 
 
-    let heart = document.createElement("div");
+let heart=document.createElement("div");
 
 
-    heart.className="collectible";
-
-
-    heart.style.left =
-    (15 + Math.random()*65)+"%";
-
-
-    heart.style.bottom =
-    (i*150+120)+"px";
+heart.className="collectible";
 
 
 
-    heart.innerHTML = `
-
-    <div class="stef"></div>
-
-    <span>❤️</span>
-
-    `;
+heart.style.left=
+(10+Math.random()*70)+"%";
 
 
 
-    world.appendChild(heart);
+heart.style.bottom=
+(i*170+100)+"px";
 
 
-    hearts.push(heart);
+
+
+heart.innerHTML=`
+
+<div class="stef"></div>
+
+<span>❤️</span>
+
+`;
+
+
+
+world.appendChild(heart);
+
+
+hearts.push(heart);
 
 
 }
@@ -923,64 +987,69 @@ for(let i=1;i<=50;i++){
 function collectHearts(){
 
 
-    hearts.forEach((heart,index)=>{
+hearts.forEach((heart,index)=>{
 
 
-        if(!heart)
+if(!heart)
 
-        return;
-
-
-
-        let ix = heart.offsetLeft;
-
-
-        let iy = parseInt(heart.style.bottom);
+return;
 
 
 
-
-        if(
-
-        x+55 > ix &&
-
-        x < ix+70 &&
+let ix=heart.offsetLeft;
 
 
-        y+55 > iy &&
-
-        y < iy+50
-
-        ){
-
-
-            heart.remove();
-
-
-            hearts[index]=null;
-
-
-            score++;
-
-
-            scoreText.innerHTML=score;
+let iy=parseInt(heart.style.bottom);
 
 
 
-            // NEED 30 OUT OF 50
-
-            if(score>=30){
-
-                win();
-
-            }
 
 
-        }
+if(
+
+x+55>ix &&
+
+x<ix+70 &&
+
+
+y+55>iy &&
+
+y<iy+50
+
+){
+
+
+heart.remove();
+
+
+hearts[index]=null;
 
 
 
-    });
+score++;
+
+
+scoreText.innerHTML=score;
+
+
+
+
+if(score>=30){
+
+
+win();
+
+
+}
+
+
+
+}
+
+
+
+});
+
 
 
 }
@@ -991,16 +1060,20 @@ function collectHearts(){
 
 
 
+
 // add heart checking into update
 
-const gameLoop = update;
+const originalUpdate=update;
 
 
-update = function(){
+update=function(){
 
-    collectHearts();
 
-    gameLoop();
+collectHearts();
+
+
+originalUpdate();
+
 
 };
 
@@ -1011,32 +1084,44 @@ update = function(){
 
 
 
-
-// KEYBOARD CONTROLS
+// KEYBOARD
 
 
 document.addEventListener("keydown",e=>{
 
 
-    if(e.key==="ArrowLeft")
+if(e.key==="ArrowLeft")
 
-        left=true;
-
-
-
-    if(e.key==="ArrowRight")
-
-        right=true;
+left=true;
 
 
 
-    if(e.key==="ArrowUp" && !falling)
+if(e.key==="ArrowRight")
 
-        vy=jumpPower;
+right=true;
 
+
+
+// ONLY JUMP IF ON PLATFORM
+
+if(
+e.key==="ArrowUp" &&
+grounded &&
+!falling
+){
+
+
+vy=jumpPower;
+
+
+grounded=false;
+
+
+}
 
 
 });
+
 
 
 
@@ -1046,19 +1131,19 @@ document.addEventListener("keydown",e=>{
 document.addEventListener("keyup",e=>{
 
 
-    if(e.key==="ArrowLeft")
+if(e.key==="ArrowLeft")
 
-        left=false;
+left=false;
 
 
 
-    if(e.key==="ArrowRight")
+if(e.key==="ArrowRight")
 
-        right=false;
-
+right=false;
 
 
 });
+
 
 
 
@@ -1073,26 +1158,30 @@ document.addEventListener("keyup",e=>{
 function hold(button,press,release){
 
 
-    button.addEventListener("pointerdown",e=>{
+
+button.addEventListener("pointerdown",e=>{
 
 
-        e.preventDefault();
+e.preventDefault();
 
 
-        press();
+press();
 
 
-    });
+});
 
 
 
-    button.addEventListener("pointerup",release);
+button.addEventListener("pointerup",release);
 
 
-    button.addEventListener("pointerleave",release);
+button.addEventListener("pointerleave",release);
+
 
 
 }
+
+
 
 
 
@@ -1107,6 +1196,8 @@ document.getElementById("left"),
 ()=>left=false
 
 );
+
+
 
 
 
@@ -1127,16 +1218,30 @@ document.getElementById("right"),
 
 
 
+
+
+// FIXED JUMP BUTTON
+
 document.getElementById("jump")
 .addEventListener("pointerdown",()=>{
 
 
-    if(!falling)
+if(grounded && !falling){
 
-        vy=jumpPower;
+
+vy=jumpPower;
+
+
+grounded=false;
+
+
+}
+
 
 
 });
+
+
 
 
 
