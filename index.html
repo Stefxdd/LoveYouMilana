@@ -1,28 +1,156 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Love You Milana ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: black;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Puzzle screen */
+    #puzzleScreen {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+    }
+
+    #puzzle {
+      width: min(92vw, 500px);
+      aspect-ratio: 1 / 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      border: 3px solid white;
+    }
+
+    .piece {
+      background-image: url("IMG_9350.jpg");
+      background-size: 300% 300%;
+      border: 1px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+    }
+
+    /* Video screen */
+    #videoScreen {
+      display: none;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+
+      background-image: url("IMG_9350.jpg");
+      background-size: 180px;
+      background-repeat: repeat;
+    }
+
+    video {
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      border-radius: 15px;
+    }
+  </style>
+
 </head>
 
-<body style="
-  margin:0;
-  min-height:100vh;
-  background-image:url('IMG_9350.jpg');
-  background-size:180px;
-  background-repeat:repeat;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-">
+<body>
 
-  <video controls playsinline style="
-    width:90%;
-    max-width:700px;
-    border-radius:15px;
-  ">
-    <source src="LoveYouMilanaaaaaa.mp4" type="video/mp4">
-  </video>
+  <!-- Puzzle -->
+
+  <div id="puzzleScreen">
+    <div id="puzzle"></div>
+  </div>
+
+  <!-- Video -->
+
+  <div id="videoScreen">
+    <video controls playsinline>
+      <source src="LoveYouMilanaaaaaa.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    const puzzle = document.getElementById("puzzle");
+    const puzzleScreen = document.getElementById("puzzleScreen");
+    const videoScreen = document.getElementById("videoScreen");
+
+    let pieces = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    let selectedPiece = null;
+
+    pieces.sort(() => Math.random() - 0.5);
+
+    function drawPuzzle() {
+      puzzle.innerHTML = "";
+
+      pieces.forEach((number, index) => {
+        const piece = document.createElement("div");
+
+        piece.className = "piece";
+
+        const row = Math.floor(number / 3);
+        const column = number % 3;
+
+        piece.style.backgroundPosition =
+          `${column * 50}% ${row * 50}%`;
+
+        piece.addEventListener("click", () => {
+
+          if (selectedPiece === null) {
+            selectedPiece = index;
+            piece.style.outline = "4px solid white";
+
+          } else {
+
+            [pieces[selectedPiece], pieces[index]] =
+            [pieces[index], pieces[selectedPiece]];
+
+            selectedPiece = null;
+
+            drawPuzzle();
+            checkPuzzle();
+          }
+
+        });
+
+        puzzle.appendChild(piece);
+      });
+    }
+
+    function checkPuzzle() {
+
+      const solved = pieces.every(
+        (piece, index) => piece === index
+      );
+
+      if (solved) {
+
+        setTimeout(() => {
+
+          puzzleScreen.style.display = "none";
+
+          videoScreen.style.display = "flex";
+
+        }, 500);
+
+      }
+
+    }
+
+    drawPuzzle();
+  </script>
 
 </body>
 </html>
