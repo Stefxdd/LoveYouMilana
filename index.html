@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Catch My Hearts ❤️</title>
+<title>Fura-mi inima ❤️</title>
 
 <style>
 
@@ -417,24 +417,22 @@ text-decoration:none;
 }
 
 
-
 </style>
 
 </head>
 
 
 <body>
-    <audio id="bgMusic" loop>
-    <source src="Milana.mp3.mp3" type="audio/mpeg">
+
+<audio id="bgMusic" loop>
+<source src="Milana.mp3.mp3" type="audio/mpeg">
 </audio>
 
 
 <h1>Fura-mi inima HAI ❤️</h1>
 
 
-
 <div id="hud">
-
 
 <div>
 
@@ -460,9 +458,6 @@ Lives:
 </div>
 
 
-
-
-
 <div id="game">
 
 
@@ -473,9 +468,6 @@ Lives:
 
 
 </div>
-
-
-
 
 
 <div id="endScreen">
@@ -495,7 +487,6 @@ MI-AI FURAT INIMA!!
 </p>
 
 
-
 <a id="endButton" href="#">
 
 Ultima Statie ❤️
@@ -509,509 +500,26 @@ Ultima Statie ❤️
 </div>
 
 
-
-
-
 <div id="controls">
 
 
 <button id="left">
-
 ←
-
 </button>
 
 
 <button id="jump">
-
 ↑
-
 </button>
 
 
 <button id="right">
-
 →
-
 </button>
 
 
 </div>
-<script>
-    
-    const bgMusic = document.getElementById("bgMusic");
 
-document.addEventListener("pointerdown", function startMusic(){
-
-    bgMusic.play();
-
-}, {once:true});
-
-const game = document.getElementById("game");
-const world = document.getElementById("world");
-const player = document.getElementById("player");
-
-const scoreText = document.getElementById("score");
-const livesText = document.getElementById("lives");
-
-const endScreen = document.getElementById("endScreen");
-const endTitle = document.getElementById("endTitle");
-const endText = document.getElementById("endText");
-const endButton = document.getElementById("endButton");
-
-
-let x = 270;
-let y = 80;
-
-let vx = 0;
-let vy = 0;
-
-let camera = 0;
-
-let score = 0;
-let lives = 3;
-
-let falling = false;
-let gameFinished = false;
-
-let grounded = false;
-
-let left=false;
-let right=false;
-
-
-const gravity=-0.55;
-const jumpPower=14;
-
-
-
-let lastSafeX=x;
-let lastSafeY=40;
-
-
-
-let platforms=[];
-
-
-
-for(let i=0;i<80;i++){
-
-
-let platform=document.createElement("div");
-
-
-platform.className="platform";
-
-
-platform.style.width =
-(100+Math.random()*90)+"px";
-
-
-platform.style.left =
-(15+Math.random()*60)+"%";
-
-
-platform.style.bottom =
-(i*110)+"px";
-
-
-
-world.appendChild(platform);
-
-
-platforms.push(platform);
-
-
-}
-
-
-
-
-
-
-function updateLives(){
-
-
-livesText.innerHTML =
-"❤️".repeat(lives)+
-"🖤".repeat(3-lives);
-
-
-}
-
-
-
-
-
-
-
-function respawn(){
-
-
-player.classList.remove("falling");
-
-
-x=lastSafeX;
-
-
-y=lastSafeY+25;
-
-
-vx=0;
-
-vy=0;
-
-
-camera=Math.max(0,lastSafeY-300);
-
-
-world.style.bottom=-camera+"px";
-
-
-player.style.opacity="1";
-
-player.style.transform="none";
-
-
-falling=false;
-
-
-}
-
-
-
-
-
-
-
-function loseLife(){
-
-
-if(gameFinished || falling)
-
-return;
-
-
-
-lives--;
-
-
-updateLives();
-
-
-
-falling=true;
-
-
-player.classList.add("falling");
-
-
-
-
-
-if(lives<=0){
-
-
-gameFinished=true;
-
-
-
-setTimeout(()=>{
-
-
-endScreen.style.display="flex";
-
-
-endTitle.innerHTML="CUM ASAAA 😭";
-
-
-endText.innerHTML="Doroga v aeroporttt ❤️";
-
-
-
-endButton.innerHTML="Mai incearca 🔄";
-
-
-endButton.removeAttribute("href");
-
-
-
-endButton.onclick=function(e){
-
-
-e.preventDefault();
-
-
-location.reload();
-
-
-};
-
-
-
-},1000);
-
-
-
-return;
-
-
-}
-
-
-
-
-
-
-setTimeout(()=>{
-
-
-respawn();
-
-
-},1000);
-
-
-
-}
-
-
-
-
-
-
-
-
-function win(){
-
-
-if(gameFinished)
-
-return;
-
-
-
-gameFinished=true;
-
-
-
-endScreen.style.display="flex";
-
-
-endTitle.innerHTML="BRAVO ZAYA ❤️";
-
-
-endText.innerHTML="MI-AI FURAT INIMA";
-
-
-
-endButton.innerHTML="Ultima statie ❤️";
-
-
-
-endButton.href=
-"https://stefxdd.github.io/MilanaEstiBravo/";
-
-
-
-endButton.onclick=function(e){
-
-
-e.preventDefault();
-
-
-window.location.href=
-"https://stefxdd.github.io/MilanaEstiBravo/";
-
-
-};
-
-
-
-}
-
-
-
-
-
-
-
-
-
-function update(){
-
-
-
-if(gameFinished){
-
-return;
-
-}
-
-
-
-
-
-
-grounded=false;
-
-
-
-
-
-if(left)
-
-vx=-5;
-
-
-else if(right)
-
-vx=5;
-
-
-else
-
-vx*=0.8;
-
-
-
-
-
-vy+=gravity;
-
-
-x+=vx;
-
-
-y+=vy;
-
-
-
-
-
-
-if(x<0)
-
-x=0;
-
-
-
-if(x>game.clientWidth-55)
-
-x=game.clientWidth-55;
-
-
-
-
-
-
-
-platforms.forEach(platform=>{
-
-
-let px=platform.offsetLeft;
-
-
-let py=parseInt(platform.style.bottom);
-
-
-
-
-
-
-if(
-
-x+55>px &&
-
-x<px+platform.offsetWidth &&
-
-
-y<=py+18 &&
-
-y>=py-15 &&
-
-
-vy<0
-
-){
-
-
-y=py+18;
-
-
-vy=jumpPower;
-
-
-grounded=true;
-
-
-
-if(y>lastSafeY){
-
-
-lastSafeX=x;
-
-
-lastSafeY=y;
-
-
-}
-
-
-}
-
-
-
-});
-
-
-
-
-
-
-
-if(y-camera>300){
-
-
-camera=y-300;
-
-
-world.style.bottom=-camera+"px";
-
-
-}
-
-
-
-
-
-
-
-if(y<camera-250 && !falling){
-
-
-loseLife();
-
-
-}
-
-
-
-
-
-
-player.style.left=x+"px";
-
-
-player.style.bottom=y+"px";
-
-
-
-requestAnimationFrame(update);
-
-
-
-}
     // HEARTS
 
 let hearts=[];
@@ -1179,6 +687,9 @@ oldUpdate();
 document.addEventListener("keydown",e=>{
 
 
+startMusic();
+
+
 if(e.key==="ArrowLeft")
 
 left=true;
@@ -1263,6 +774,9 @@ e.preventDefault();
 button.setPointerCapture(e.pointerId);
 
 
+startMusic();
+
+
 press();
 
 
@@ -1331,6 +845,10 @@ document.getElementById("jump")
 
 
 e.preventDefault();
+
+
+startMusic();
+
 
 
 if(grounded && !falling){
