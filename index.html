@@ -424,6 +424,9 @@ text-decoration:none;
 
 
 <body>
+    <audio id="bgMusic" loop>
+    <source src="Milana.mp3.mp3" type="audio/mpeg">
+</audio>
 
 
 <h1>Fura-mi inima HAI ❤️</h1>
@@ -535,6 +538,14 @@ Ultima Statie ❤️
 
 </div>
 <script>
+    
+    const bgMusic = document.getElementById("bgMusic");
+
+document.addEventListener("pointerdown", function startMusic(){
+
+    bgMusic.play();
+
+}, {once:true});
 
 const game = document.getElementById("game");
 const world = document.getElementById("world");
